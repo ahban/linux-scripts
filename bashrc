@@ -97,7 +97,7 @@ PKGS=(\
 )
 
 for (( i = 0; i < ${#PKGS[@]}; i++ )); do
-    cur_path=${MANS[$i]} 
+    cur_path=${PKGS[$i]} 
     if [[ -d ${cur_path} ]]; then
         if [[ -z "$(echo $PKG_CONFIG_PATH | grep -o ${cur_path})" ]]; then 
             echo "exporting PKG_CONFIG_PATH: ${cur_path}"

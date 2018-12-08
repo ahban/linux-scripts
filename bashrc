@@ -1,41 +1,62 @@
 # .bashrc
 
-# Uncomment the following line if you don't like systemctl's auto-paging feature:
-
-# User specific aliases and functions
-# Ban Zhihua Added the following command.
-# If you have any questions, please do not hesitate to ask me at banzhihua@cvte.com
-
+###############################################################################
 # color prompt
-# PS1='\[\033[02;32m\]\u@\H:\[\033[02;34m\]\w\$\[\033[00m\] '
-export PS1="\e[0;32m\u@\h:\e[0;33m\w\e[0m\$ "
 
-######################################################################
+#export PS1="\e[0;32m\u@\h:\e[0;33m\w\e[0m\$ "
+if [ "Ubuntu" != "$(cat /proc/version | grep -o Ubuntu | head -1 | sed 's| *||')" ]; then
+    export PS1="\033[01;32m\u@\h\033[00m:\033[01;33m\w\033[00m\$ "
+fi
+
+###############################################################################
 # alias 
+
 alias ll='ls -lah --color=auto'
 alias 24-3='ssh 24-3'
 alias sun='ssh sun'
 
-######################################################################
+###############################################################################
 # PATH
-#LFILE=${HOME}/soft/anaconda2/bin; [ -d ${LFILE} ] && export PATH=${LFILE}:${PATH}
-#LFILE=${HOME}/soft/python2/bin  ; [ -d ${LFILE} ] && export PATH=${LFILE}:${PATH}
+PATHS=(\
+    # python 2
+    #"${HOME}/soft/anaconda2/bin" 
+    #"${HOME}/soft/python2/bin"   
 
-#LFILE=${HOME}/soft/python3/bin; [ -d ${LFILE} ] && export PATH=${LFILE}:${PATH}
-LFILE=${HOME}/soft/anaconda3/bin; [ -d ${LFILE} ] && export PATH=${LFILE}:${PATH}
+    # python 3
+    #"${HOME}/soft/python3/bin"   
+    "${HOME}/soft/anaconda3/bin" 
+    
+    # ncurses for compiled vim8.1
+    "${HOME}/soft/ncurses/bin"
+    
+    # compiled local vim. refer the end of vimrc to see how to compile vim
+    "${HOME}/soft/vim/bin"
+)
 
-export PATH=${HOME}/soft/ncurses/bin:${PATH}
-export PATH=${HOME}/soft/vim/bin:${PATH}
+for (( i = 0; i < ${#PATHS[@]}; i++ )); do
+    if [[ -d ${PATHS[$i]} ]]; then
+        echo "exporting : ${PATHS[$i]}"
+        export PATH=${PATHS[$i]}:${PATH}
+    fi
+done
 
-######################################################################
+###############################################################################
 # LD_LIBRARY_PATH
-export LD_LIBRARY_PATH=${HOME}/soft/ncurses/lib:${LD_LIBRARY_PATH}
+LIBS=(\
+    "${HOME}/soft/ncurses/lib"
+    "${HOME}/soft/python2/lib"
+    "${HOME}/soft/anaconda2/lib"
+    "${HOME}/soft/python3/lib"
+    "${HOME}/soft/anaconda3/lib"
+)
 
-export LD_LIBRARY_PATH=${HOME}/soft/python2/lib:${LD_LIBRARY_PATH}
-export LD_LIBRARY_PATH=${HOME}/soft/anaconda2/lib:${LD_LIBRARY_PATH}
+for (( i = 0; i < ${#LIBS[@]}; i++ )); do
+    if [[ -d ${LIBS[$i]} ]]; then
+        echo "exporting LIB : ${LIBS[$i]}"
+        export LD_LIBRARY_PATH=${LIBS[$i]}:${LD_LIBRARY_PATH}
+    fi
+done
 
-export LD_LIBRARY_PATH=${HOME}/soft/python3/lib:${LD_LIBRARY_PATH}
-export LD_LIBRARY_PATH=${HOME}/soft/anaconda3/lib:${LD_LIBRARY_PATH}
 ######################################################################
 # MANPATH
 export MANPATH=${HOME}/soft/vim/share/man:${MANPATH}

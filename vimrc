@@ -201,14 +201,12 @@ func InsertComments()
         call append(line('.')-1, repeat(' ', l:indent_width).repeat('*', 80-2-l:indent_width)."/")
     endif
     if &filetype == 'vim'
-        call append(line('.')-1, repeat(' ', l:indent_width).repeat('"', 80-l:indent_width))
+        call append(line('.')-1, repeat(' ', l:indent_width).repeat('"', 80-1-l:indent_width))
         call append(line('.')-1, repeat(' ', l:indent_width).'"')
-        call append(line('.')-1, repeat(' ', l:indent_width).repeat('"', 80-l:indent_width))
     endif
     if &filetype == 'sh' || &filetype == 'python'
-        call append(line('.')-1, repeat(' ', l:indent_width).repeat('#', 80-l:indent_width))
+        call append(line('.')-1, repeat(' ', l:indent_width).repeat('#', 80-1-l:indent_width))
         call append(line('.')-1, repeat(' ', l:indent_width).'#')
-        call append(line('.')-1, repeat(' ', l:indent_width).repeat('#', 80-l:indent_width))
     endif
 endfunc
 

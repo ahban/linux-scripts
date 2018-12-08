@@ -98,7 +98,7 @@ au filetype vim,cuda,cpp,c,sh,python,make,matlab setlocal foldmethod=indent
 set foldnestmax=10
 "set nofoldenable
 "set foldignore=
-set foldlevel=3
+"set foldlevel=3
 nnoremap <space> za
 
 " go to the line that last time modified
@@ -125,7 +125,7 @@ au BufNewFile,BufRead *.cuh set ft=cpp
 if exists('+syntax')
     syntax on
 endif
-if v:version > 800
+if v:version >= 800
     set backspace=indent,eol,start
 endif
 

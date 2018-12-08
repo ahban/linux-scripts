@@ -333,8 +333,10 @@ augroup END
     " 3. Download ncurses from https://ftp.gnu.org/gnu/ncurses/
     " 4. Install ncurses into home path 
     "   ./configure --prefix=${HOME}/soft/ncurses; make -j 5 ; make install
+    "
     " 5. Download Python3 from 
     "   https://www.python.org/ftp/python/3.6.7/Python-3.6.7.tar.xz
+    "   TODO try miniconda3 instead of python3 or anaconda3 and goto step 9
     " 6. Install Python3 into home path
     "   ./configure --prefix=${HOME}/soft/python3 
     "   --enable-optimizations --enable-shared

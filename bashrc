@@ -41,7 +41,7 @@ for (( i = 0; i < ${#PATHS[@]}; i++ )); do
     cur_path=${PATHS[$i]} 
     if [[ -d ${cur_path} ]]; then
         if [[ -z "$(echo $PATH | grep -o ${cur_path})" ]]; then 
-            echo "exporting PATH : ${cur_path}"
+            #echo "exporting PATH : ${cur_path}"
             export PATH=${cur_path}:${PATH}
         fi
     fi
@@ -63,7 +63,7 @@ for (( i = 0; i < ${#LIBS[@]}; i++ )); do
     cur_path=${LIBS[$i]} 
     if [[ -d ${cur_path} ]]; then
         if [[ -z "$(echo $LD_LIBRARY_PATH | grep -o ${cur_path})" ]]; then 
-            echo "exporting LIB : ${cur_path}"
+            #echo "exporting LIB : ${cur_path}"
             export LD_LIBRARY_PATH=${cur_path}:${LD_LIBRARY_PATH}
         fi
     fi
@@ -81,7 +81,7 @@ for (( i = 0; i < ${#MANS[@]}; i++ )); do
     cur_path=${MANS[$i]} 
     if [[ -d ${cur_path} ]]; then
         if [[ -z "$(echo $MANPATH | grep -o ${cur_path})" ]]; then 
-            echo "exporting MANPATH : ${cur_path}"
+            #echo "exporting MANPATH : ${cur_path}"
             export MANPATH=${cur_path}:${MANPATH}
         fi
     fi
@@ -100,7 +100,7 @@ for (( i = 0; i < ${#PKGS[@]}; i++ )); do
     cur_path=${PKGS[$i]} 
     if [[ -d ${cur_path} ]]; then
         if [[ -z "$(echo $PKG_CONFIG_PATH | grep -o ${cur_path})" ]]; then 
-            echo "exporting PKG_CONFIG_PATH: ${cur_path}"
+            #echo "exporting PKG_CONFIG_PATH: ${cur_path}"
             export PKG_CONFIG_PATH=${cur_path}:${PKG_CONFIG_PATH}
         fi
     fi

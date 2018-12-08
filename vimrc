@@ -63,7 +63,7 @@ nnoremap <F12> :YcmCompleter GoTo<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " scattered settings 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 language en_US.utf8
 set nocompatible
 set mouse=a

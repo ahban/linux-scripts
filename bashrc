@@ -41,7 +41,7 @@ for (( i = 0; i < ${#PATHS[@]}; i++ )); do
     cur_path=${PATHS[$i]} 
     if [[ -d ${cur_path} ]]; then
         if [[ -z "$(echo $PATH | grep -o ${cur_path})" ]]; then 
-            echo "exporting : ${cur_path}"
+            echo "exporting PATH : ${cur_path}"
             export PATH=${cur_path}:${PATH}
         fi
     fi

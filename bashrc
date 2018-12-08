@@ -70,7 +70,7 @@ for (( i = 0; i < ${#LIBS[@]}; i++ )); do
 done
 unset LIBS
 
-######################################################################
+###############################################################################
 # MANPATH
 MANS=(\
     "${HOME}/soft/vim/share/man"
@@ -86,12 +86,26 @@ for (( i = 0; i < ${#MANS[@]}; i++ )); do
         fi
     fi
 done
-
 unset MANS
-######################################################################
-# PKG_CONFIG_PATH
 
-export PKG_CONFIG_PATH=/usr/local/cuda/pkgconfig:$PKG_CONFIG_PATH
+###############################################################################
+# PKG_CONFIG_PATH
+PKGS=(\
+    "/usr/local/cuda/pkgconfig"
+    "${HOME}/soft/cuda-8.0/pkgconfig"
+    "${HOME}/soft/cuda-10.0/pkgconfig"
+)
+
+for (( i = 0; i < ${#PKGS[@]}; i++ )); do
+    cur_path=${MANS[$i]} 
+    if [[ -d ${cur_path} ]]; then
+        if [[ -z "$(echo $PKG_CONFIG_PATH | grep -o ${cur_path})" ]]; then 
+            echo "exporting PKG_CONFIG_PATH: ${cur_path}"
+            export PKG_CONFIG_PATH=${cur_path}:${PKG_CONFIG_PATH}
+        fi
+    fi
+done
+unset PKGS
 
 # added by Anaconda2 5.3.1 installer
 # >>> conda init >>>

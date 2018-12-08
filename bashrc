@@ -7,7 +7,8 @@
 # If you have any questions, please do not hesitate to ask me at banzhihua@cvte.com
 
 # color prompt
-PS1='\[\033[02;32m\]\u@\H:\[\033[02;34m\]\w\$\[\033[00m\] '
+# PS1='\[\033[02;32m\]\u@\H:\[\033[02;34m\]\w\$\[\033[00m\] '
+export PS1="\e[0;32m\u@\h:\e[0;33m\w\e[0m\$ "
 
 ######################################################################
 # alias 
@@ -17,11 +18,11 @@ alias sun='ssh sun'
 
 ######################################################################
 # PATH
-#export PATH=${HOME}/soft/anaconda2/bin:$PATH
-#export PATH=${HOME}/soft/python2/bin:${PATH}
+#LFILE=${HOME}/soft/anaconda2/bin; [ -d ${LFILE} ] && export PATH=${LFILE}:${PATH}
+#LFILE=${HOME}/soft/python2/bin  ; [ -d ${LFILE} ] && export PATH=${LFILE}:${PATH}
 
-#export PATH=${HOME}/soft/python3/bin:${PATH}
-export PATH=${HOME}/soft/anaconda3/bin:$PATH
+#LFILE=${HOME}/soft/python3/bin; [ -d ${LFILE} ] && export PATH=${LFILE}:${PATH}
+LFILE=${HOME}/soft/anaconda3/bin; [ -d ${LFILE} ] && export PATH=${LFILE}:${PATH}
 
 export PATH=${HOME}/soft/ncurses/bin:${PATH}
 export PATH=${HOME}/soft/vim/bin:${PATH}

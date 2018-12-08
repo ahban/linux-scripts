@@ -31,6 +31,9 @@ PATHS=(\
     
     # compiled local vim. refer the end of vimrc to see how to compile vim
     "${HOME}/soft/vim/bin"
+
+    # general local bin
+    "${HOME}/soft/bin"
 )
 
 for (( i = 0; i < ${#PATHS[@]}; i++ )); do
@@ -54,8 +57,10 @@ LIBS=(\
 
 for (( i = 0; i < ${#LIBS[@]}; i++ )); do
     if [[ -d ${LIBS[$i]} ]]; then
-        echo "exporting LIB : ${LIBS[$i]}"
-        export LD_LIBRARY_PATH=${LIBS[$i]}:${LD_LIBRARY_PATH}
+        if [[ -z "$(echo $LD_LIBRARY_PATH | grep -o ${LIBS[$i]})" ]]; then 
+            echo "exporting LIB : ${LIBS[$i]}"
+            export LD_LIBRARY_PATH=${LIBS[$i]}:${LD_LIBRARY_PATH}
+        fi
     fi
 done
 

@@ -35,8 +35,10 @@ PATHS=(\
 
 for (( i = 0; i < ${#PATHS[@]}; i++ )); do
     if [[ -d ${PATHS[$i]} ]]; then
-        echo "exporting : ${PATHS[$i]}"
-        export PATH=${PATHS[$i]}:${PATH}
+        if [[ -z "$(echo $PATH | grep -o ${PATHS[$i]})" ]]; then 
+            echo "exporting : ${PATHS[$i]}"
+            export PATH=${PATHS[$i]}:${PATH}
+        fi
     fi
 done
 

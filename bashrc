@@ -25,6 +25,7 @@ PATHS=(\
     # python 3
     #"${HOME}/soft/python3/bin"
     "${HOME}/soft/anaconda3/bin" 
+    "${HOME}/soft/miniconda3/bin" 
     
     # ncurses for compiled vim8.1
     "${HOME}/soft/ncurses/bin"
@@ -37,13 +38,15 @@ PATHS=(\
 )
 
 for (( i = 0; i < ${#PATHS[@]}; i++ )); do
-    if [[ -d ${PATHS[$i]} ]]; then
-        if [[ -z "$(echo $PATH | grep -o ${PATHS[$i]})" ]]; then 
-            echo "exporting : ${PATHS[$i]}"
-            export PATH=${PATHS[$i]}:${PATH}
+    cur_path=${PATHS[$i]} 
+    if [[ -d ${cur_path} ]]; then
+        if [[ -z "$(echo $PATH | grep -o ${cur_path})" ]]; then 
+            echo "exporting : ${cur_path}"
+            export PATH=${cur_path}:${PATH}
         fi
     fi
 done
+unset PATHS
 
 ###############################################################################
 # LD_LIBRARY_PATH
@@ -56,18 +59,34 @@ LIBS=(\
 )
 
 for (( i = 0; i < ${#LIBS[@]}; i++ )); do
-    if [[ -d ${LIBS[$i]} ]]; then
-        if [[ -z "$(echo $LD_LIBRARY_PATH | grep -o ${LIBS[$i]})" ]]; then 
-            echo "exporting LIB : ${LIBS[$i]}"
-            export LD_LIBRARY_PATH=${LIBS[$i]}:${LD_LIBRARY_PATH}
+    cur_path=${LIBS[$i]} 
+    if [[ -d ${cur_path} ]]; then
+        if [[ -z "$(echo $LD_LIBRARY_PATH | grep -o ${cur_path})" ]]; then 
+            echo "exporting LIB : ${cur_path}"
+            export LD_LIBRARY_PATH=${cur_path}:${LD_LIBRARY_PATH}
+        fi
+    fi
+done
+unset LIBS
+
+######################################################################
+# MANPATH
+MANS=(\
+    "${HOME}/soft/vim/share/man"
+    "${HOME}/soft/share/man"
+)
+
+for (( i = 0; i < ${#MANS[@]}; i++ )); do
+    cur_path=${MANS[$i]} 
+    if [[ -d ${cur_path} ]]; then
+        if [[ -z "$(echo $MANPATH | grep -o ${cur_path})" ]]; then 
+            echo "exporting MANPATH : ${cur_path}"
+            export MANPATH=${cur_path}:${MANPATH}
         fi
     fi
 done
 
-######################################################################
-# MANPATH
-export MANPATH=${HOME}/soft/vim/share/man:${MANPATH}
-
+unset MANS
 ######################################################################
 # PKG_CONFIG_PATH
 

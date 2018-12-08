@@ -20,10 +20,10 @@ alias sun='ssh sun'
 PATHS=(\
     # python 2
     #"${HOME}/soft/anaconda2/bin" 
-    #"${HOME}/soft/python2/bin"   
+    #"${HOME}/soft/python2/bin"
 
     # python 3
-    #"${HOME}/soft/python3/bin"   
+    #"${HOME}/soft/python3/bin"
     "${HOME}/soft/anaconda3/bin" 
     
     # ncurses for compiled vim8.1

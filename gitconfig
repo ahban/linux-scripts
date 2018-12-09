@@ -3,3 +3,5 @@
 
 [log]
 	decorate = short
+[color]
+	decorate = always

@@ -159,7 +159,7 @@ def Settings( **kwargs ):
   if language == 'python':
     return {
       #'interpreter_path': PathToPythonUsedDuringBuild()
-      'interpreter_path': '~/soft/anaconda3/bin/python'
+      'interpreter_path': os.popen('which python3').read().replace('\n','')
     }
 
   return {}

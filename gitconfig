@@ -1,0 +1,5 @@
+[push]
+	default = matching
+
+[log]
+	decorate = short

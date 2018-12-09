@@ -35,6 +35,9 @@ PATHS=(\
 
     # general local bin
     "${HOME}/soft/bin"
+
+    # new projects
+    "${HOME}/.scripts/bin"
 )
 
 for (( i = 0; i < ${#PATHS[@]}; i++ )); do

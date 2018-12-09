@@ -1,0 +1,74 @@
+###############################################################################
+# Author  : Ban Zhihua
+# Date    : DATE_PLACE_HOLDER
+###############################################################################
+GC_CFLAGS = -c -Wall
+NV_CFLAGS = -c --compiler-options -Wall 
+
+LD_CFLAGS =
+
+NV_CFLAGS += -gencode arch=compute_61,code=sm_61
+NV_CFLAGS += -gencode arch=compute_50,code=sm_50
+
+
+###############################################################################
+# additional libs
+
+# cuda libs
+CUDA_VERSION = $(shell nvcc --version | grep -Eo "release ?[0-9]+\.[0-9]+" | grep -Eo "[0-9]+\.[0-9]")
+GC_CFLAGS += `pkg-config --cflags cudart-$(CUDA_VERSION) cublas-$(CUDA_VERSION) curand-$(CUDA_VERSION)`
+LD_CFLAGS += `pkg-config --libs   cudart-$(CUDA_VERSION) cublas-$(CUDA_VERSION) curand-$(CUDA_VERSION)`
+
+###############################################################################
+# set compilers 
+GCC_VERSION = $(shell g++ --version | grep -E '^g\+\+' | grep -o "4.8.5" | head -1 | sed "s/ //g")
+ifneq "$(GCC_VERSION)" "4.8.5"
+    CC = g++-4.8 -std=c++11
+    NV_CFLAGS += -ccbin g++-4.8
+else
+    CC = g++ -std=c++11
+    NV_CFLAGS += -ccbin g++
+endif
+
+NV = nvcc -std=c++11
+
+
+###############################################################################
+# target, sources, objects
+
+# target
+TARGET=TARGET_PLACE_HOLDER.exe
+
+# cpp source and objects
+GC_SOURCES = $(wildcard *.cpp)
+GC_OBJECTS = $(GC_SOURCES:.cpp=.cpp.o)
+
+# cuda source and objects
+CU_SOURCES = $(wildcard *.cu)
+CU_OBJECTS = $(CU_SOURCES:.cu=.cu.o)
+
+
+###############################################################################
+# commands
+
+remote: all
+	scp $(TARGET) 24-3:~/remotes/
+	ssh 24-3 'cd ./remotes/; LD_LIBRARY_PATH=/usr/local/cuda/lib64: ./$(TARGET)'
+
+run: all
+	./$(TARGET)
+
+all: $(GC_OBJECTS) $(CU_OBJECTS)
+	$(CC) $^ $(LD_CFLAGS) -o $(TARGET)
+
+clean:
+	rm -rf *.o *.exe *.out $(TARGET)
+
+%.cpp.o: %.cpp
+	$(CC) $(GC_CFLAGS) $^ -o $@
+
+%.cu.o: %.cu
+	$(NV) $(NV_CFLAGS) $^ -o $@
+
+#$(EXECUTABLE): % : %.o
+#	$(CC) $(LDFLAGS) $^ -o $@

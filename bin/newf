@@ -1,0 +1,33 @@
+#!/bin/bash
+###############################################################################
+# Author  : Ban Zhihua
+# Contact : sawpara@126.com
+# Date    : 2018-11-7
+###############################################################################
+
+tabs 4
+
+# default options
+project_type="plain"
+
+newf_full=$0
+newf_exe=`echo $newf_full | awk -F/ '{printf "%s\n", $NF}'` 
+newf_dir=`echo $newf_full | sed "s|${newf_exe}$||"`
+. $newf_dir/create-files.sh
+
+while [[ $# -gt 0 ]]
+do
+    filename=$1
+    echo "creating file \"$filename\""
+    extension="$(echo $filename | awk -F. '{printf "%s", $NF}')"
+    case $extension in
+        h|hpp)
+            new_h_file $filename
+            ;;
+        cpp|cc|cxx)
+            new_cpp_file $filename 
+            ;;
+    esac
+    shift
+done
+

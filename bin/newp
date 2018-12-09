@@ -1,0 +1,76 @@
+#!/bin/bash
+###############################################################################
+# Author  : Ban Zhihua
+# Contact : sawpara@126.com
+# Date    : 2018-11-7
+###############################################################################
+
+tabs 4
+
+# default options
+project_type="plain"
+
+newp_full=$0
+newp_exe=`echo $newp_full | awk -F/ '{printf "%s\n", $NF}'` 
+newp_dir=`echo $newp_full | sed "s|${newp_exe}$||"`
+. ${newp_dir}/create-files.sh
+
+POSITIONAL=()
+while [[ $# -gt 0 ]]
+do
+    key="$1"
+    case $key in
+        -t|--type)
+            project_type="$2"
+            shift # past argument
+            shift # past value
+            ;;
+        *)    # unknown option
+            POSITIONAL+=("$1") # save it in an array for later
+            shift # past argument
+            ;;
+    esac
+done
+
+set -- "${POSITIONAL[@]}" # restore positional parameters
+
+
+# find the corresponding makefile
+base_makefile_name=${newp_dir}makefile.$project_type
+
+if [[ ! -e $base_makefile_name ]]; then
+    echo "the project type [${project_type}] has not been supported for now"
+    exit 1
+fi
+
+while [[ $# -gt 0 ]]
+do
+    project_str=$1
+    echo "creating a ${project_type} project : $project_str" 
+    project_pure=`echo $project_str | awk -F/ '{printf "%s\n", ($NF)}'`
+    project_root=`echo $project_str | sed "s|${project_pure}$||"`
+    project_makefile_name=${project_root}${project_pure}/makefile
+
+    mkdir -p $project_str  
+
+    if [[ ! -e $project_makefile_name ]]; then
+        sed "s|\bTARGET_PLACE_HOLDER\b|${project_pure}|" $base_makefile_name \
+            > $project_makefile_name 
+        
+        sed -i "s|\bDATE_PLACE_HOLDER\b|$(date)|" $project_makefile_name
+        printf "\tcreating %s\n" "$project_makefile_name" 
+    else
+        printf "\t$project_makefile_name exists, I did not change it.\n"
+    fi
+
+    cpp_file_name=${project_str}/${project_pure}.cpp
+    if [[ ! -e $cpp_file_name ]]; then 
+        printf "\tcreating %s\n" "$cpp_file_name" 
+        new_cpp_file ${cpp_file_name}
+    else
+        printf "\t${cpp_file_name} exists, I did not change it.\n"
+    fi
+
+    shift 
+done
+

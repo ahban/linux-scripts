@@ -7,6 +7,9 @@ NV_CFLAGS = -c --compiler-options -Wall
 
 LD_CFLAGS =
 
+REMOTE_ID = 24-3
+REMOTE_DR = ~/remotes
+
 NV_CFLAGS += -gencode arch=compute_61,code=sm_61
 NV_CFLAGS += -gencode arch=compute_50,code=sm_50
 
@@ -52,9 +55,13 @@ CU_OBJECTS = $(CU_SOURCES:.cu=.cu.o)
 # commands
 
 remote: all
-	scp $(TARGET) 24-3:~/remotes/
-	ssh 24-3 'cd ./remotes/; LD_LIBRARY_PATH=/usr/local/cuda/lib64: ./$(TARGET)'
+	ssh $(REMOTE_ID) "[[ -d $(REMOTE_DR) ]] || mkdir -p $(REMOTE_DR)"
+	scp $(TARGET) $(REMOTE_ID):$(REMOTE_DR)
+	ssh $(REMOTE_ID) \
+		"cd $(REMOTE_DR);source ~/.bashrc; ./$(TARGET)"
 
+
+#"cd ${REMOTE_DR};. ~/.bashrc; LD_LIBRARY_PATH=/usr/local/cuda/lib64: ./$(TARGET)"
 run: all
 	./$(TARGET)
 

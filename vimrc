@@ -33,7 +33,6 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 let g:ycm_max_diagnostics_to_display = 40
-" let g:ycm_global_ycm_extra_conf='${HOME}/.vim/bundle/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
 let g:ycm_global_ycm_extra_conf='${HOME}/.scripts/ycm_conf.py'
 let g:ycm_always_populate_location_list = 1
 

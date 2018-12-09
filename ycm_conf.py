@@ -37,7 +37,7 @@ import os
 
 DIR_OF_THIS_SCRIPT = p.abspath( p.dirname( __file__ ) )
 DIR_OF_THIRD_PARTY = p.join( DIR_OF_THIS_SCRIPT, 'third_party' )
-SOURCE_EXTENSIONS = [ '.cpp', '.cxx', '.cc', '.c', '.m', '.mm' ]
+SOURCE_EXTENSIONS = [ '.cpp', '.cxx', '.cc', '.c', '.m', '.mm', '.cu' ]
 
 # These are the compilation flags that will be used in case there's no
 # compilation database set (by default, one is not set).
@@ -58,10 +58,11 @@ flags = [
 # use when compiling headers. So it will guess. Badly. So C++ headers will be
 # compiled as C headers. You don't want that so ALWAYS specify the '-x' flag.
 # For a C project, you would set this to 'c' instead of 'c++'.
-'-x', 'c++',
+#'-x', 'c++',
+'-x', 'cuda',
 '-isystem', get_python_inc(),
-'-I', 'cpp/ycm/ClangCompleter',
 '-I', '/usr/include/c++/4.8.5',
+'-I', '/usr/include',
 '-I', os.popen('which nvcc').read().replace('bin/nvcc\n', 'include'),
 ]
 

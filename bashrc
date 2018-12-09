@@ -52,11 +52,11 @@ unset PATHS
 # LD_LIBRARY_PATH
 LIBS=(\
     "${HOME}/soft/ncurses/lib"
-    "${HOME}/soft/python2/lib"
-    "${HOME}/soft/anaconda2/lib"
+    #"${HOME}/soft/python2/lib"
+    #"${HOME}/soft/anaconda2/lib"
     "${HOME}/soft/python3/lib"
-    "${HOME}/soft/anaconda3/lib"
-    "${HOME}/soft/miniconda3/lib"
+    #"${HOME}/soft/anaconda3/lib"
+    #"${HOME}/soft/miniconda3/lib"
 )
 
 for (( i = 0; i < ${#LIBS[@]}; i++ )); do

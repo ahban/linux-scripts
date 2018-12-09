@@ -41,7 +41,7 @@ PATHS=(\
     
     # cuda
     "${HOME}/soft/cuda-10.0/bin"
-    "${HOME}/soft/cuda-8.0/bin"
+    #"${HOME}/soft/cuda-8.0/bin"
 )
 
 for (( i = 0; i < ${#PATHS[@]}; i++ )); do

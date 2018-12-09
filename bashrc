@@ -55,6 +55,10 @@ unset PATHS
 # LD_LIBRARY_PATH
 LIBS=(\
     "${HOME}/soft/ncurses/lib"
+    
+    "${HOME}/soft/cuda-8.0/lib64"
+    "${HOME}/soft/cuda-10.0/lib64"
+
     #"${HOME}/soft/python2/lib"
     #"${HOME}/soft/anaconda2/lib"
     "${HOME}/soft/python3/lib"

@@ -98,7 +98,7 @@ set textwidth=80
 
 " fold stuff
 au filetype vim,cuda,cpp,c,sh,python,make,matlab setlocal foldmethod=indent
-set foldnestmax=10
+set foldnestmax=4
 "set nofoldenable
 "set foldignore=
 "set foldlevel=3

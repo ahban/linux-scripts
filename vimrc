@@ -46,7 +46,7 @@ Bundle 'majutsushi/tagbar'
 " tagbar
 " toggle tagbar display
 map <F4> :TagbarToggle<CR>
-let g:tagbar_ctags_bin='${HOME}/soft/ctags/bin/ctags'
+let g:tagbar_ctags_bin='~/soft/ctags/bin/ctags'
 
 " nerdtree
 " toggle nerdtree display

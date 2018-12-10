@@ -199,9 +199,8 @@ nnoremap <C-k><C-i> :call InsertComments()<CR>
 func InsertComments()
     let l:indent_width=indent(line('.'))
     if &filetype == 'cpp' || &filetype=='c'
-        call append(line('.')-1, repeat(' ', l:indent_width)."/".repeat('*', 80-2-l:indent_width))
-        call append(line('.')-1, repeat(' ', l:indent_width)."*")
-        call append(line('.')-1, repeat(' ', l:indent_width).repeat('*', 80-2-l:indent_width)."/")
+        call append(line('.')-1, repeat(' ', l:indent_width).repeat('/', 80-1-l:indent_width))
+        call append(line('.')-1, repeat(' ', l:indent_width)."// ")
     endif
     if &filetype == 'vim'
         call append(line('.')-1, repeat(' ', l:indent_width).repeat('"', 80-1-l:indent_width))

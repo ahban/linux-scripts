@@ -37,7 +37,7 @@ import os
 
 DIR_OF_THIS_SCRIPT = p.abspath( p.dirname( __file__ ) )
 DIR_OF_THIRD_PARTY = p.join( DIR_OF_THIS_SCRIPT, 'third_party' )
-SOURCE_EXTENSIONS = [ '.cpp', '.cxx', '.cc', '.c', '.m', '.mm']
+SOURCE_EXTENSIONS = [ '.cpp', '.cxx', '.cc', '.c', '.m', '.mm', '.cu' ]
 
 # These are the compilation flags that will be used in case there's no
 # compilation database set (by default, one is not set).
@@ -92,7 +92,7 @@ else:
 
 def IsHeaderFile( filename ):
   extension = p.splitext( filename )[ 1 ]
-  return extension in [ '.h', '.hxx', '.hpp', '.hh' ]
+  return extension in [ '.h', '.hxx', '.hpp', '.hh', '.cuh' ]
 
 
 def FindCorrespondingSourceFile( filename ):

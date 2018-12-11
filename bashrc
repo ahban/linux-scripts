@@ -3,6 +3,8 @@
 ###############################################################################
 # color prompt
 
+# read the following link could help you to set your own PS1 
+# https://unix.stackexchange.com/questions/105958/terminal-prompt-not-wrapping-correctly
 #export PS1="\e[0;32m\u@\h:\e[0;33m\w\e[0m\$ "
 if [ "Ubuntu" != "$(cat /proc/version | grep -o Ubuntu | head -1 | sed 's| *||')" ]; then
     export PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;33m\]\w\[\033[00m\]\$ "

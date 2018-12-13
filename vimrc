@@ -198,7 +198,7 @@ au BufNewFile * normal G
 nnoremap <C-k><C-i> :call InsertComments()<CR>
 func InsertComments()
     let l:indent_width=indent(line('.'))
-    if &filetype == 'cpp' || &filetype=='c'
+    if &filetype == 'cpp' || &filetype=='c' || &filetype=='cuda'
         call append(line('.')-1, repeat(' ', l:indent_width).repeat('/', 80-1-l:indent_width))
         call append(line('.')-1, repeat(' ', l:indent_width)."// ")
     endif

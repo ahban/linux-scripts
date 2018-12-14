@@ -5,3 +5,5 @@
 	decorate = short
 [color]
 	decorate = always
+[core]
+	editor = vim

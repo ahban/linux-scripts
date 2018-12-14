@@ -43,8 +43,8 @@ PATHS=(\
     "${HOME}/.scripts/bin"
     
     # cuda
-    "${HOME}/soft/cuda-10.0/bin"
-    #"${HOME}/soft/cuda-8.0/bin"
+    #"${HOME}/soft/cuda-10.0/bin"
+    "${HOME}/soft/cuda-8.0/bin"
 
     # git 
     "${HOME}/soft/git-2.18.1/bin"

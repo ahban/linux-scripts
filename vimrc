@@ -32,6 +32,10 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
+" autocmd BufNewFile,BufRead *.cu set filetype=cpp 
+au BufNewFile,BufRead *.cu  set ft=cpp
+au BufNewFile,BufRead *.cuh set ft=cpp
+
 let g:ycm_max_diagnostics_to_display = 40
 
 au filetype cuda let g:ycm_global_ycm_extra_conf='${HOME}/.scripts/ycm_conf_cuda.py'
@@ -70,7 +74,7 @@ nnoremap <F12> :YcmCompleter GoTo<CR>
 language en_US.utf8
 set nocompatible
 set mouse=a
-set nowrap
+"set nowrap
 
 colorscheme gruvbox 
 
@@ -120,11 +124,6 @@ set laststatus=2
 set cmdheight=2
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}
 
-
-" autocmd BufNewFile,BufRead *.cu set filetype=cpp 
-"au BufNewFile,BufRead *.cu  set ft=cuda
-au BufNewFile,BufRead *.cuh set ft=cpp
-
 if exists('+syntax')
     syntax on
 endif
@@ -164,7 +163,7 @@ func SetTitle()
         call append(line(".")+4, "******************************************************************************/") 
         call append(line(".")+5, "")
     endif
-    if &filetype == 'cpp' && fileext != 'h'
+    if &filetype == 'cpp' && fileext != 'h' && fileext != 'cu' && fileext != 'cuh'
         call append(line(".")+6, "#include <iostream>")
         call append(line(".")+7, "using namespace std;")
         call append(line(".")+8, "")
@@ -198,7 +197,7 @@ au BufNewFile * normal G
 nnoremap <C-k><C-i> :call InsertComments()<CR>
 func InsertComments()
     let l:indent_width=indent(line('.'))
-    if &filetype == 'cpp' || &filetype=='c'
+    if &filetype == 'cpp' || &filetype=='c' || &filetype=='cuda'
         call append(line('.')-1, repeat(' ', l:indent_width).repeat('/', 80-1-l:indent_width))
         call append(line('.')-1, repeat(' ', l:indent_width)."// ")
     endif

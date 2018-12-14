@@ -74,7 +74,7 @@ nnoremap <F12> :YcmCompleter GoTo<CR>
 language en_US.utf8
 set nocompatible
 set mouse=a
-set nowrap
+"set nowrap
 
 colorscheme gruvbox 
 

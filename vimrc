@@ -16,6 +16,7 @@ call vundle#begin()
     " Plugins
     Plugin 'Valloric/YouCompleteMe'
     Plugin 'morhetz/gruvbox'
+    Plugin 'maciakl/vim-neatstatus'
     
     " All of your Plugins must be added before the following line
 call vundle#end()            " required

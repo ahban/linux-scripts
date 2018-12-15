@@ -22,13 +22,13 @@ alias sun='ssh sun'
 # PATH
 PATHS=(\
     # python 2
-    #"${HOME}/soft/anaconda2/bin" 
+    #"${HOME}/soft/anaconda2/bin"
     #"${HOME}/soft/python2/bin"
 
     # python 3
     #"${HOME}/soft/python3/bin"
-    "${HOME}/soft/anaconda3/bin" 
-    "${HOME}/soft/miniconda3/bin" 
+    "${HOME}/soft/anaconda3/bin"
+    "${HOME}/soft/miniconda3/bin"
     
     # ncurses for compiled vim8.1
     "${HOME}/soft/ncurses/bin"
@@ -48,12 +48,15 @@ PATHS=(\
 
     # git 
     "${HOME}/soft/git-2.18.1/bin"
+
+    # texlive 
+    "${HOME}/soft/texlive/2017/bin/x86_64-linux"
 )
 
 for (( i = 0; i < ${#PATHS[@]}; i++ )); do
-    cur_path=${PATHS[$i]} 
+    cur_path=${PATHS[$i]}
     if [[ -d ${cur_path} ]]; then
-        if [[ -z "$(echo $PATH | grep -o ${cur_path})" ]]; then 
+        if [[ -z "$(echo $PATH | grep -o ${cur_path})" ]]; then
             #echo "exporting PATH : ${cur_path}"
             export PATH=${cur_path}:${PATH}
         fi
@@ -77,9 +80,9 @@ LIBS=(\
 )
 
 for (( i = 0; i < ${#LIBS[@]}; i++ )); do
-    cur_path=${LIBS[$i]} 
+    cur_path=${LIBS[$i]}
     if [[ -d ${cur_path} ]]; then
-        if [[ -z "$(echo $LD_LIBRARY_PATH | grep -o ${cur_path})" ]]; then 
+        if [[ -z "$(echo $LD_LIBRARY_PATH | grep -o ${cur_path})" ]]; then
             #echo "exporting LIB : ${cur_path}"
             export LD_LIBRARY_PATH=${cur_path}:${LD_LIBRARY_PATH}
         fi
@@ -92,18 +95,37 @@ unset LIBS
 MANS=(\
     "${HOME}/soft/vim/share/man"
     "${HOME}/soft/share/man"
+    "${HOME}/soft/texlive/2017/texmf-dist/doc/man"
 )
 
 for (( i = 0; i < ${#MANS[@]}; i++ )); do
-    cur_path=${MANS[$i]} 
+    cur_path=${MANS[$i]}
     if [[ -d ${cur_path} ]]; then
-        if [[ -z "$(echo $MANPATH | grep -o ${cur_path})" ]]; then 
+        if [[ -z "$(echo $MANPATH | grep -o ${cur_path})" ]]; then
             #echo "exporting MANPATH : ${cur_path}"
             export MANPATH=${cur_path}:${MANPATH}
         fi
     fi
 done
 unset MANS
+
+###############################################################################
+# INFOPATH
+INFS=(\
+    "${HOME}/soft/texlive/2017/texmf-dist/doc/info"
+)
+
+for (( i = 0; i < ${#INFS[@]}; i++ )); do
+    cur_path=${INFS[$i]}
+    if [[ -d ${cur_path} ]]; then
+        if [[ -z "$(echo $INFOPATH | grep -o ${cur_path})" ]]; then
+            #echo "exporting INFOPATH: ${cur_path}"
+            export INFOPATH=${cur_path}:${INFOPATH}
+        fi
+    fi
+done
+unset INFOPATH
+
 
 ###############################################################################
 # PKG_CONFIG_PATH
@@ -114,7 +136,7 @@ PKGS=(\
 )
 
 for (( i = 0; i < ${#PKGS[@]}; i++ )); do
-    cur_path=${PKGS[$i]} 
+    cur_path=${PKGS[$i]}
     if [[ -d ${cur_path} ]]; then
         if [[ -z "$(echo $PKG_CONFIG_PATH | grep -o ${cur_path})" ]]; then 
             #echo "exporting PKG_CONFIG_PATH: ${cur_path}"

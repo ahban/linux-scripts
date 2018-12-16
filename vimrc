@@ -98,7 +98,7 @@ set shiftwidth=4 tabstop=4 expandtab
 au filetype make setlocal tabstop=4 shiftwidth=4
 
 " mark the colmn width 
-au filetype markdown,cuda,make,cpp,python,c,sh,matlab setlocal colorcolumn=80,120
+au filetype markdown,tex,plaintex,cuda,make,cpp,python,c,sh,matlab setlocal colorcolumn=80,120
 set textwidth=80
 
 " fold stuff
@@ -135,7 +135,7 @@ endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " auto insert code
-au BufNewFile *.cpp,*.py,*.cc,*.c,*.h,*.hpp,*.cu,*.cuh,*.sh,*.java exec ":call SetTitle()" 
+au BufNewFile *.tex,*.cpp,*.py,*.cc,*.c,*.h,*.hpp,*.cu,*.cuh,*.sh,*.java exec ":call SetTitle()" 
 func SetTitle() 
     let fileext = expand("%:e")
     let l:years = '(2018)'
@@ -155,6 +155,17 @@ func SetTitle()
         call append(line(".")+4, "\# created time : ".strftime("%c")) 
         call append(line(".")+5, "\###############################################################################") 
         call append(line(".")+6, "") 
+    elseif 'tex' == &filetype || 'plaintex' == &filetype
+        call setline(1,          repeat("%", 79))
+        call append(line("."),   "%   file name    : ".expand("%")) 
+        call append(line(".")+1, "%   authors      : Ban Zhihua" . l:years) 
+        call append(line(".")+2, "%   contact      : sawpara@126.com ") 
+        call append(line(".")+3, "%   created time : ".strftime("%c")) 
+        call append(line(".")+4, repeat("%", 79)) 
+        call append(line(".")+5, "")
+        call append(line(".")+6, "\\documentclass{ctexart}")
+        call append(line(".")+7, "\\begin{document}")
+        call append(line(".")+8, "\\end{document}")
     else 
         call setline(1,          "/******************************************************************************") 
         call append(line("."),   "  > file name    : ".expand("%")) 
@@ -212,6 +223,27 @@ func InsertComments()
     endif
 endfunc
 
+nnoremap <C-F5> :call CompileMe()<CR>
+
+func CompileMe()
+    if &filetype == 'tex'
+        for line_number in range(1, 2) "line("$"))
+            let     line_str = getline(line_number)
+            let  matched_str = matchstr(line_str, '^\s*[^%]\s*documentclass\s*\(\[.*\]\)\?\s*\({.*}\)')
+            let  matched_str = matchstr(matched_str, '\({\s*.*\s*}\)')
+            let  matched_str = matchstr(matched_str, '\a\+')
+            echo matched_str
+            if !empty(matched_str)
+                if 'ctexart' == matched_str || 'ctexrep' == matched_str || 'ctexbook' == matched_str || 'ctexbeamer' == matched_str
+                    echom system('xelatex '.expand('%'))
+                else
+                    echom system('latex '.expand('%'))
+                endif
+                return
+            endif
+        endfor
+    endif
+endfunc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     "          FILE: restore_view.vim
     "      Language: vim script

@@ -57,3 +57,18 @@ new_h_file(){
         printf "#endif // end ${hmac}" >> $file_name 
     fi
 }
+
+new_tex_file(){
+    if [[ ! -e $1 ]]; then 
+        local file_name=$1
+        iso_filename=$(echo $file_name | awk -F/ '{printf "%s", $NF}')
+        printf_repeat "\%" 79 > $file_name
+        printf "\n" >> $file_name
+        printf "%  file name    : $iso_filename\n" >> $file_name
+        printf "%  author       : Ban Zhihua\n" >> $file_name
+        printf "%  contact      : sawpara@126.com\n" >> $file_name
+        printf "%  created time : $(date)\n" >> $file_name 
+        printf_repeat "%" 79 >> $file_name 
+        printf "/\n" >> $file_name 
+    fi
+}

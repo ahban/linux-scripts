@@ -226,8 +226,8 @@ endfunc
 nnoremap <C-F5> :call CompileMe()<CR>
 
 func CompileMe()
-    if &filetype == 'tex'
-        for line_number in range(1, 2) "line("$"))
+    if &filetype == 'tex' || &filetype == 'plaintex'
+        for line_number in range(1, line('$'))
             let     line_str = getline(line_number)
             let  matched_str = matchstr(line_str, '^\s*[^%]\s*documentclass\s*\(\[.*\]\)\?\s*\({.*}\)')
             let  matched_str = matchstr(matched_str, '\({\s*.*\s*}\)')

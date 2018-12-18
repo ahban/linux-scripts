@@ -236,14 +236,15 @@ func CompileMe()
             let  matched_str = matchstr(matched_str, '\a\+')
             if !empty(matched_str)
                 if 'ctexart' == matched_str || 'ctexrep' == matched_str || 'ctexbook' == matched_str || 'ctexbeamer' == matched_str
-                    silent let l = system('xelatex '.expand('%'))
+                    silent let log = system('xelatex '.expand('%'))
                 else
-                    silent let l = system('pdflatex '.expand('%'))
+                    silent let log = system('pdflatex '.expand('%'))
                 endif
                 if v:shell_error == 0
                     silent let l = system('evince '.expand("%:p:r").".pdf &")
                     echo "Success"
                 else
+                    echo log
                     echo "Failed"
                 endif
                 return

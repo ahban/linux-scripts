@@ -226,6 +226,7 @@ endfunc
 nnoremap <C-F5> :call CompileMe()<CR>
 
 func CompileMe()
+    " latex compile
     if &filetype == 'tex' || &filetype == 'plaintex'
         for line_number in range(1, line('$'))
             let     line_str = getline(line_number)
@@ -235,22 +236,22 @@ func CompileMe()
             if !empty(matched_str)
                 if 'ctexart' == matched_str || 'ctexrep' == matched_str || 'ctexbook' == matched_str || 'ctexbeamer' == matched_str
                     silent let l = system('xelatex '.expand('%'))
-                    if v:shell_error == 0
-                        echo "Success"
-                    else
-                        echo "Failed"
-                    endif
                 else
                     silent let l = system('pdflatex '.expand('%'))
-                    if v:shell_error == 0
-                        echo "Success"
-                    else
-                        echo "Failed"
-                    endif
+                endif
+                if v:shell_error == 0
+                    silent let l = system('evince '.expand("%:p:r").".pdf &")
+                    echo "Success"
+                else
+                    echo "Failed"
                 endif
                 return
             endif
         endfor
+    endif
+    " python
+    if &filetype == 'python'
+        echo system('python '.expand("%:p"))
     endif
 endfunc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

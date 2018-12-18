@@ -232,12 +232,21 @@ func CompileMe()
             let  matched_str = matchstr(line_str, '^\s*[^%]\s*documentclass\s*\(\[.*\]\)\?\s*\({.*}\)')
             let  matched_str = matchstr(matched_str, '\({\s*.*\s*}\)')
             let  matched_str = matchstr(matched_str, '\a\+')
-            echo matched_str
             if !empty(matched_str)
                 if 'ctexart' == matched_str || 'ctexrep' == matched_str || 'ctexbook' == matched_str || 'ctexbeamer' == matched_str
-                    echom system('xelatex '.expand('%'))
+                    silent let l = system('xelatex '.expand('%'))
+                    if v:shell_error == 0
+                        echo "Success"
+                    else
+                        echo "Failed"
+                    endif
                 else
-                    echom system('latex '.expand('%'))
+                    silent let l = system('pdflatex '.expand('%'))
+                    if v:shell_error == 0
+                        echo "Success"
+                    else
+                        echo "Failed"
+                    endif
                 endif
                 return
             endif

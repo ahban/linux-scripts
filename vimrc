@@ -226,6 +226,7 @@ endfunc
 nnoremap <C-F5> :call CompileMe()<CR>
 
 func CompileMe()
+    silent write
     " latex compile
     if &filetype == 'tex' || &filetype == 'plaintex'
         for line_number in range(1, line('$'))

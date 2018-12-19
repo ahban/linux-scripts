@@ -75,7 +75,7 @@ nnoremap <F12> :YcmCompleter GoTo<CR>
 language en_US.utf8
 set nocompatible
 set mouse=a
-"set nowrap
+au filetype tex,plaintex setlocal nowrap
 
 colorscheme gruvbox 
 
@@ -102,7 +102,7 @@ au filetype markdown,tex,plaintex,cuda,make,cpp,python,c,sh,matlab setlocal colo
 set textwidth=80
 
 " fold stuff
-au filetype vim,cuda,cpp,c,sh,python,make,matlab setlocal foldmethod=indent
+au filetype vim,cuda,cpp,c,tex,plaintex,sh,python,make,matlab setlocal foldmethod=indent
 set foldnestmax=4
 "set nofoldenable
 "set foldignore=
@@ -229,6 +229,8 @@ func CompileMe()
     silent write
     " latex compile
     if &filetype == 'tex' || &filetype == 'plaintex'
+        silent let log = system('rm -rf '.expand("%:p:r").'.aux')
+        silent let log = system('rm -rf '.expand("%:p:r").'.log')
         for line_number in range(1, line('$'))
             let     line_str = getline(line_number)
             let  matched_str = matchstr(line_str, '^\s*[^%]\s*documentclass\s*\(\[.*\]\)\?\s*\({.*}\)')
@@ -254,6 +256,10 @@ func CompileMe()
     " python
     if &filetype == 'python'
         echo system('python '.expand("%:p"))
+    endif
+    " c++ / cuda / c
+    if &filetype == 'cpp' || &filetype == 'cuda' || &filetype == 'c'
+        echo system("make")
     endif
 endfunc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

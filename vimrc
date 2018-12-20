@@ -99,7 +99,7 @@ au filetype make setlocal tabstop=4 shiftwidth=4
 
 " mark the colmn width 
 au filetype markdown,tex,plaintex,cuda,make,cpp,python,c,sh,matlab setlocal colorcolumn=80,120
-set textwidth=80
+set textwidth=79
 
 " fold stuff
 au filetype vim,cuda,cpp,c,tex,plaintex,sh,python,make,matlab setlocal foldmethod=indent
@@ -123,7 +123,7 @@ set incsearch
 " status bar
 set laststatus=2
 set cmdheight=2
-set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}
+"set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}
 
 if exists('+syntax')
     syntax on
@@ -152,7 +152,7 @@ func SetTitle()
         call append(line(".")+1, "\# file name    : ".expand("%")) 
         call append(line(".")+2, "\# authors      : Ban Zhihua" . l:years) 
         call append(line(".")+3, "\# contact      : sawpara@126.com") 
-        call append(line(".")+4, "\# created time : ".strftime("%c")) 
+        call append(line(".")+4, "\# created time : ".strftime("%c", localtime())) 
         call append(line(".")+5, "\###############################################################################") 
         call append(line(".")+6, "") 
     elseif 'tex' == &filetype || 'plaintex' == &filetype
@@ -160,7 +160,7 @@ func SetTitle()
         call append(line("."),   "%   file name    : ".expand("%")) 
         call append(line(".")+1, "%   authors      : Ban Zhihua" . l:years) 
         call append(line(".")+2, "%   contact      : sawpara@126.com ") 
-        call append(line(".")+3, "%   created time : ".strftime("%c")) 
+        call append(line(".")+3, "%   created time : ".strftime("%c", localtime())) 
         call append(line(".")+4, repeat("%", 79)) 
         call append(line(".")+5, "")
         call append(line(".")+6, "\\documentclass{ctexart}")
@@ -171,7 +171,7 @@ func SetTitle()
         call append(line("."),   "  > file name    : ".expand("%")) 
         call append(line(".")+1, "  > authors      : Ban Zhihua" . l:years) 
         call append(line(".")+2, "  > contact      : sawpara@126.com ") 
-        call append(line(".")+3, "  > created time : ".strftime("%c")) 
+        call append(line(".")+3, "  > created time : ".strftime("%c", localtime())) 
         call append(line(".")+4, "******************************************************************************/") 
         call append(line(".")+5, "")
     endif
@@ -212,14 +212,22 @@ func InsertComments()
     if &filetype == 'cpp' || &filetype=='c' || &filetype=='cuda'
         call append(line('.')-1, repeat(' ', l:indent_width).repeat('/', 80-1-l:indent_width))
         call append(line('.')-1, repeat(' ', l:indent_width)."// ")
+        return
     endif
     if &filetype == 'vim'
         call append(line('.')-1, repeat(' ', l:indent_width).repeat('"', 80-1-l:indent_width))
         call append(line('.')-1, repeat(' ', l:indent_width).'"')
+        return
     endif
     if &filetype == 'sh' || &filetype == 'python'
         call append(line('.')-1, repeat(' ', l:indent_width).repeat('#', 80-1-l:indent_width))
         call append(line('.')-1, repeat(' ', l:indent_width).'#')
+        return
+    endif
+    if &filetype == 'tex' || &filetype == 'plaintex'
+        call append(line('.')-1, repeat(' ', l:indent_width).repeat('%', 80-1-l:indent_width))
+        call append(line('.')-1, repeat(' ', l:indent_width).'%')
+        return
     endif
 endfunc
 

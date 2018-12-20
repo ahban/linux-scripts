@@ -72,6 +72,8 @@ LIBS=(\
     "${HOME}/soft/cuda-8.0/lib64"
     "${HOME}/soft/cuda-10.0/lib64"
 
+    "${HOME}/soft/libevent-2.1.8/lib"
+
     #"${HOME}/soft/python2/lib"
     #"${HOME}/soft/anaconda2/lib"
     "${HOME}/soft/python3/lib"
@@ -91,11 +93,29 @@ done
 unset LIBS
 
 ###############################################################################
+# LD_RUN_PATH
+LIBS=(\
+    "${HOME}/soft/libevent-2.1.8/lib"
+)
+
+for (( i = 0; i < ${#LIBS[@]}; i++ )); do
+    cur_path=${LIBS[$i]}
+    if [[ -d ${cur_path} ]]; then
+        if [[ -z "$(echo $LD_RUN_PATH | grep -o ${cur_path})" ]]; then
+            #echo "exporting LIB : ${cur_path}"
+            export LD_RUN_PATH=${cur_path}:${LD_RUN_PATH}
+        fi
+    fi
+done
+unset LIBS
+
+###############################################################################
 # MANPATH
 MANS=(\
     "${HOME}/soft/vim/share/man"
     "${HOME}/soft/share/man"
     "${HOME}/soft/texlive/2017/texmf-dist/doc/man"
+    "${HOME}/soft/tmux-2.8/share/man"
 )
 
 for (( i = 0; i < ${#MANS[@]}; i++ )); do

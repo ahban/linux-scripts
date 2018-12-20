@@ -51,6 +51,9 @@ PATHS=(\
 
     # texlive 
     "${HOME}/soft/texlive/2017/bin/x86_64-linux"
+
+    # tmux
+    "${HOME}/soft/tmux-2.8/bin"
 )
 
 for (( i = 0; i < ${#PATHS[@]}; i++ )); do

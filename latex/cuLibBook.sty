@@ -1,0 +1,79 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   file name    : cuLibBook.sty
+%   authors      : Ban Zhihua(2014-2018)
+%   contact      : sawpara@126.com 
+%   created time : unknown 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ProvidesPackage{cuLibBook}
+%\usepackage{ctex}
+
+\usepackage{geometry}
+\geometry{left=2.2cm,right=2.5cm,top=2.2cm,bottom=2.4cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\usepackage{url}
+\usepackage[hyphens]{url}
+\usepackage{hyperref}
+%\hypersetup{breaklinks=true}[breaklinks=true]
+%\usepackage{breakurl} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Figure
+
+\usepackage{graphicx}
+\usepackage{placeins}
+%\usepackage[pdftex]{graphicx}
+%\graphicspath{{./figures/}}
+%\DeclareGraphicsExtensions{.pdf,.jpeg,.jpg,.png}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% float
+\usepackage{dblfloatfix}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 程序代码格式
+\usepackage{listings} %插入代码
+\usepackage{xcolor} %代码高亮
+
+%\newfontfamily\codefont{Ubuntu Mono} % ubuntu
+\newfontfamily\codefont{Courier New} % Windows
+\definecolor{mygray}{gray}{0.75}
+\lstset{  firstnumber=1,
+              basicstyle=\codefont ,%\sffamily,
+              keywordstyle= \codefont\bfseries\color{blue}, 
+              commentstyle=\codefont\itshape ,
+              flexiblecolumns=true ,
+              stringstyle=\ttfamily ,
+              showstringspaces=false ,
+              escapechar={\%} ,
+              numbers=right , numberstyle=\footnotesize ,
+              breaklines=true ,
+              backgroundcolor=\color{mygray} ,
+              tabsize=2 ,
+              numberbychapter=true, % count by chapter, need \thechapter
+              captionpos=b, % caption position[b for bottom, t for top]
+              extendedchars=false,
+            }
+
+\renewcommand\lstlistingname{代码段}
+\lstdefinelanguage{mebash}
+{ sensitive=true ,
+  morecomment=[l]{\#},
+}
+\lstdefinelanguage{mec}
+{ morekeywords={cufftComplex,cufftHandle,int,short,unsigned,char,void,%
+                float,double,if,else,while,do,for,return,sizeof} ,
+  sensitive=true ,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+}
+
+
+
+%\usepackage[chapter]{minted}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% 参考文献
+\bibliographystyle{plain}
+

@@ -1,0 +1,173 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   file name    : abanArt.sty
+%   authors      : Ban Zhihua(2018)
+%   contact      : sawpara@126.com 
+%   created time : unknown 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ProvidesPackage{abanArt}
+
+\usepackage{geometry}
+\geometry{a4paper, top=2.5cm, left=2cm, bottom=2cm, right=2cm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% head and foot rules
+\usepackage{etoolbox,fancyhdr,xcolor}
+
+\newcommand{\headrulecolor}[1]{%
+    \patchcmd{\headrule}{\hrule}{\color{#1}\hrule}{}{}}
+
+\newcommand{\footrulecolor}[1]{%
+    \patchcmd{\footrule}{\hrule}{\color{#1}\hrule}{}{}}
+
+\pagestyle{fancy}
+\renewcommand{\footrulewidth}{0.4pt}
+\headrulecolor{blue!100}% Set header rule colour to 70% red.
+\footrulecolor{blue!100}% Set header rule colour to 70% red.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% math fonts
+\usepackage[retainorgcmds]{IEEEtrantools}
+\usepackage{amsmath,amssymb}
+\usepackage{bm,commath}
+\usepackage{mathtools}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% utillities
+\usepackage{csquotes}
+\usepackage{xcolor}
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\allowdisplaybreaks[0]
+\usepackage{enumitem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% bib style
+\bibliographystyle{plain}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Math commands
+\newcommand{\Perp}{\mathrel{\text{\scalebox{1.07}{$\perp\mkern-10mu\perp$}}}}
+\DeclareMathOperator{\E}{\mathbb{E}}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{dg}
+
+\def\dsum{\displaystyle\sum}
+\def\dprod{\displaystyle\prod}
+
+\newcommand{\sumTt}{\sum_{t=1}^{T}}
+\newcommand{\sumTtt}{\sum_{t=2}^{T}}
+
+\newcommand{\dsumTt}{\dsum_{t=1}^{T}}
+
+\newcommand{\dpart}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dpartb}[2]{\dfrac{\partial #1}{\partial #2}}
+
+
+% parenthesis
+\newcommand{\pta}[1]{\big( #1 \big)}
+\newcommand{\ptb}[1]{\Big( #1 \Big)}
+\newcommand{\ptc}[1]{\bigg( #1 \bigg)}
+\newcommand{\ptd}[1]{\Bigg( #1 \Bigg)}
+
+% square brackets 
+\newcommand{\sba}[1]{\big[ #1 \big]}
+\newcommand{\sbb}[1]{\Big[ #1 \Big]}
+\newcommand{\sbc}[1]{\bigg[ #1 \bigg]}
+\newcommand{\sbd}[1]{\Bigg[ #1 \Bigg]}
+
+% curly brackets 
+\newcommand{\cba}[1]{\big\{ #1 \big\}}
+\newcommand{\cbb}[1]{\Big\{ #1 \Big\}}
+\newcommand{\cbc}[1]{\bigg\{ #1 \bigg\}}
+\newcommand{\cbd}[1]{\Bigg\{ #1 \Bigg\}}
+
+\newcommand{\dga}[1]{\diag\big[ #1 \big]}
+\newcommand{\dgb}[1]{\diag\Big[ #1 \Big]}
+\newcommand{\dgc}[1]{\diag\bigg[ #1 \bigg]}
+\newcommand{\dgd}[1]{\diag\Bigg[ #1 \Bigg]}
+
+\newcommand{\tna}[1]{\big[ #1 \big]^T}
+\newcommand{\tnb}[1]{\Big[ #1 \Big]^T}
+\newcommand{\tnc}[1]{\bigg[ #1 \bigg]^T}
+\newcommand{\tnd}[1]{\Bigg[ #1 \Bigg]^T}
+
+\newcommand{\difa}[1]{\dif\big[ #1 \big]}
+\newcommand{\difb}[1]{\dif\Big[ #1 \Big]}
+\newcommand{\difc}[1]{\dif\bigg[ #1 \bigg]}
+\newcommand{\difd}[1]{\dif\Bigg[ #1 \Bigg]}
+
+\newcommand{\tra}[1]{\tr\big\{ #1 \big\}}
+\newcommand{\trb}[1]{\tr\Big\{ #1 \Big\}}
+\newcommand{\trc}[1]{\tr\bigg\{ #1 \bigg\}}
+\newcommand{\trd}[1]{\tr\Bigg\{ #1 \Bigg\}}
+
+
+\newcommand{\ArrayRLa}[1]{\left({%
+    \arraycolsep=1.4pt\def\arraystretch{1.2}\begin{array}{rl} #1  \end{array}%
+}\right)}
+
+\newcommand{\ArrayRLb}[1]{\left[{%
+    \arraycolsep=1.4pt\def\arraystretch{1.2}\begin{array}{rl} #1  \end{array}%
+}\right]}
+
+\newcommand{\ArrayRLc}[1]{\left\{{%
+    \arraycolsep=1.4pt\def\arraystretch{1.2}\begin{array}{rl} #1  \end{array}%
+}\right\}}
+
+
+\newcommand{\ArrayCa}[1]{\left({%
+    \arraycolsep=1.4pt\def\arraystretch{1.2}\begin{array}{c} #1  \end{array}%
+}\right)}
+
+\newcommand{\ArrayCb}[1]{\left[{%
+    \arraycolsep=1.4pt\def\arraystretch{1.2}\begin{array}{c} #1  \end{array}%
+}\right]}
+
+\newcommand{\ArrayCc}[1]{\left\{{%
+    \arraycolsep=1.4pt\def\arraystretch{1.2}\begin{array}{c} #1  \end{array}%
+}\right\}}
+
+
+\newcommand{\ArrayBCa}[1]{\left({%
+    \arraycolsep=1.4pt\def\arraystretch{1.5}\begin{array}{c} #1  \end{array}%
+}\right)}
+\newcommand{\ArrayBCb}[1]{\left[{%
+    \arraycolsep=1.4pt\def\arraystretch{1.5}\begin{array}{c} #1  \end{array}%
+}\right]}
+\newcommand{\ArrayBCc}[1]{\left\{{%
+    \arraycolsep=1.4pt\def\arraystretch{1.5}\begin{array}{c} #1  \end{array}%
+}\right\}}
+
+
+\newcommand{\pu}[1]{\prescript{#1}{}}
+\newcommand{\pb}[1]{\prescript{}{#1}}
+
+\newcommand{\puf}{\prescript{f}{}}
+\newcommand{\pub}{\prescript{b}{}}
+
+\usepackage{graphicx}
+\newcommand*{\edot}{\mathrel{\scalebox{0.8}{$\odot$}}}
+
+% example
+%  \title{文档题目}
+%  \author{班志华 \\ \href{mailto:sawpara@126.com}{sawpara@126.com}}
+%  \date{2018年12月}
+%  
+%  \begin{document}
+%  \maketitle
+%  
+%  
+%  % \cite{Hochreiter1997}
+%  % \bibliography{bibfile}
+%  % \bibliographystyle{abbrv}
+%  
+%  \end{document}

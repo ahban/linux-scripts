@@ -23,16 +23,17 @@ fi
 
 # echo "Installing bashrc"
 
-# echo ''                                           >> ~/.bashrc
-# echo '# the following line must be the last line' >> ~/.bashrc 
-# echo 'if [ -f ${HOME}/.scripts/bashrc ]; then'    >> ~/.bashrc
-# echo '    source ${HOME}/.scripts/bashrc'         >> ~/.bashrc
-# echo 'fi'                                         >> ~/.bashrc
+echo ''                                           >> ~/.bashrc
+echo '# the following line must be the last line' >> ~/.bashrc 
+echo 'if [ -f ${HOME}/.scripts/bashrc ]; then'    >> ~/.bashrc
+echo '    source ${HOME}/.scripts/bashrc'         >> ~/.bashrc
+echo 'fi'                                         >> ~/.bashrc
 
 echo 
 echo "Installing vimrc and tmux.conf"
 ln -s ${PWD}/vimrc ${HOME}/.vimrc
 ln -s ${PWD}/tmux.conf ${HOME}/.tmux.conf
+ln -s ${PWD}/gitconfig ${HOME}/.gitconfig
 
 
 # https://www.math.ias.edu/computing/faq/local-latex-style-files

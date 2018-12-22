@@ -36,7 +36,6 @@ filetype plugin indent on    " required
 " autocmd BufNewFile,BufRead *.cu set filetype=cpp 
 au BufNewFile,BufRead *.cu  set ft=cpp
 au BufNewFile,BufRead *.cuh set ft=cpp
-
 let g:ycm_max_diagnostics_to_display = 40
 
 au filetype cuda let g:ycm_global_ycm_extra_conf='${HOME}/.scripts/ycm_conf_cuda.py'

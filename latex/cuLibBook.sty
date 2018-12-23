@@ -7,10 +7,14 @@
 \ProvidesPackage{cuLibBook}
 %\usepackage{ctex}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% page style
 \usepackage{geometry}
 \geometry{left=2.2cm,right=2.5cm,top=2.2cm,bottom=2.4cm}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% hyperref
 
 %\usepackage{url}
 \usepackage[hyphens]{url}
@@ -19,7 +23,7 @@
 %\usepackage{breakurl} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Figure
+% Figures
 
 \usepackage{graphicx}
 \usepackage{placeins}
@@ -35,9 +39,13 @@
 %% 程序代码格式
 \usepackage{listings} %插入代码
 \usepackage{xcolor} %代码高亮
-
-%\newfontfamily\codefont{Ubuntu Mono} % ubuntu
-\newfontfamily\codefont{Courier New} % Windows
+\usepackage{ifplatform}
+\ifwindows
+  \newfontfamily\codefont{Courier New} % Windows
+\fi
+\iflinux
+  \newfontfamily\codefont{Ubuntu Mono} % ubuntu
+\fi
 \definecolor{mygray}{gray}{0.75}
 \lstset{  firstnumber=1,
               basicstyle=\codefont ,%\sffamily,

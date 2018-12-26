@@ -16,6 +16,7 @@ printf_repeat(){
 new_cpp_file(){
     if [[ ! -e $1 ]] ; then
         local file_name=$1
+        local formated_date=$(date "+%a %d %b %Y %r %Z")
         iso_filename=$(echo $file_name | awk -F/ '{printf "%s", $NF}')
         printf "/*" > $file_name
         printf_repeat "*" 77 >> $file_name
@@ -23,7 +24,7 @@ new_cpp_file(){
         printf "  > file name    : $iso_filename\n" >> $file_name
         printf "  > author       : Ban Zhihua\n" >> $file_name
         printf "  > contact      : sawpara@126.com\n" >> $file_name
-        printf "  > created time : $(date)\n" >> $file_name 
+        printf "  > created time : ${formated_date}\n" >> $file_name 
         printf_repeat "*" 78 >> $file_name 
         printf "/\n" >> $file_name 
         printf "#include <iostream>\n" >> $file_name
@@ -38,6 +39,7 @@ new_h_file(){
     if [[ ! -e $1 ]]; then 
         local file_name=$1
         local hmac=
+        local formated_date=$(date "+%a %d %b %Y %r %Z")
         # comments
         printf "/*" > $file_name
         printf_repeat "*" 77 >> $file_name
@@ -45,7 +47,7 @@ new_h_file(){
         printf "  > file name    : $iso_filename\n" >> $file_name
         printf "  > author       : Ban Zhihua\n" >> $file_name
         printf "  > contact      : sawpara@126.com\n" >> $file_name
-        printf "  > created time : $(date)\n" >> $file_name 
+        printf "  > created time : ${formated_date}\n" >> $file_name 
         printf_repeat "*" 78 >> $file_name 
         printf "/\n" >> $file_name 
         # ifdef and endif
@@ -61,13 +63,14 @@ new_h_file(){
 new_tex_file(){
     if [[ ! -e $1 ]]; then 
         local file_name=$1
+        local formated_date=$(date "+%a %d %b %Y %r %Z")
         iso_filename=$(echo $file_name | awk -F/ '{printf "%s", $NF}')
         printf_repeat "\%" 79 > $file_name
         printf "\n" >> $file_name
         printf "%  file name    : $iso_filename\n" >> $file_name
         printf "%  author       : Ban Zhihua\n" >> $file_name
         printf "%  contact      : sawpara@126.com\n" >> $file_name
-        printf "%  created time : $(date)\n" >> $file_name 
+        printf "%  created time : ${formated_date}\n" >> $file_name 
         printf_repeat "%" 79 >> $file_name 
         printf "/\n" >> $file_name 
     fi

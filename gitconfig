@@ -7,3 +7,4 @@
 	decorate = always
 [core]
 	editor = vim
+	fileMode = false

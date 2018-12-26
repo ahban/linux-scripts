@@ -17,6 +17,7 @@ fi
 alias ll='ls -lah --color=auto'
 alias 24-3='ssh 24-3'
 alias sun='ssh sun'
+export LC_TIME=en_US.UTF-8
 
 ###############################################################################
 # PATH

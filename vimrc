@@ -36,11 +36,10 @@ filetype plugin indent on    " required
 " autocmd BufNewFile,BufRead *.cu set filetype=cpp 
 au BufNewFile,BufRead *.cu  set ft=cpp
 au BufNewFile,BufRead *.cuh set ft=cpp
-
 let g:ycm_max_diagnostics_to_display = 40
 
 au filetype cuda let g:ycm_global_ycm_extra_conf='${HOME}/.scripts/ycm_conf_cuda.py'
-au filetype cpp  let g:ycm_global_ycm_extra_conf='${HOME}/.scripts/ycm_conf_cpp.py'
+au filetype cpp,python,c  let g:ycm_global_ycm_extra_conf='${HOME}/.scripts/ycm_conf_cpp.py'
 
 let g:ycm_always_populate_location_list = 1
 
@@ -70,7 +69,7 @@ nnoremap <F12> :YcmCompleter GoTo<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" scattered settings 
+" miscellaneous settings 
 
 language en_US.utf8
 set nocompatible
@@ -246,7 +245,7 @@ func CompileMe()
             let  matched_str = matchstr(matched_str, '\a\+')
             if !empty(matched_str)
                 if 'ctexart' == matched_str || 'ctexrep' == matched_str || 'ctexbook' == matched_str || 'ctexbeamer' == matched_str
-                    silent let log = system('xelatex '.expand('%'))
+                    silent let log = system('xelatex -shell-escape ' . expand('%'))
                 else
                     silent let log = system('pdflatex '.expand('%'))
                 endif

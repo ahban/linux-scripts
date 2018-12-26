@@ -29,7 +29,7 @@ new_cpp_file(){
         printf "/\n" >> $file_name 
         printf "#include <iostream>\n" >> $file_name
         printf "using namespace std;\n" >> $file_name
-        printf "int main(int argc, char **argv){\n" >> $file_name
+        printf "int main(){\n" >> $file_name
         printf "    return 0;\n" >> $file_name
         echo "}" >> $file_name 
     fi

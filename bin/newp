@@ -57,7 +57,8 @@ do
         sed "s|\bTARGET_PLACE_HOLDER\b|${project_pure}|" $base_makefile_name \
             > $project_makefile_name 
         
-        sed -i "s|\bDATE_PLACE_HOLDER\b|$(date)|" $project_makefile_name
+        formated_date=$(date "+%a %d %b %Y %r %Z")
+        sed -i "s|\bDATE_PLACE_HOLDER\b|${formated_date}|" $project_makefile_name
         printf "\tcreating %s\n" "$project_makefile_name" 
     else
         printf "\t$project_makefile_name exists, I did not change it.\n"

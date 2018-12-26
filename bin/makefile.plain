@@ -1,6 +1,7 @@
 ###############################################################################
-# Author  : Ban Zhihua
-# Date    : DATE_PLACE_HOLDER
+# author       : Ban Zhihua
+# contact      : sawpara@126.com
+# created time : DATE_PLACE_HOLDER
 ###############################################################################
 GC_CFLAGS = -c -Wall
 NV_CFLAGS = -c --compiler-options -Wall 

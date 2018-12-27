@@ -39,7 +39,7 @@ au BufNewFile,BufRead *.cuh set ft=cpp
 let g:ycm_max_diagnostics_to_display = 40
 
 au filetype cuda let g:ycm_global_ycm_extra_conf='${HOME}/.scripts/ycm_conf_cuda.py'
-au filetype cpp,python,c  let g:ycm_global_ycm_extra_conf='${HOME}/.scripts/ycm_conf_cpp.py'
+au filetype cpp,python,c  let g:ycm_global_ycm_extra_conf="${HOME}/.scripts/ycm_conf_cpp.py"
 
 let g:ycm_always_populate_location_list = 1
 
@@ -158,7 +158,7 @@ func SetTitle()
         call setline(1,          repeat("%", 79))
         call append(line("."),   "%   file name    : ".expand("%")) 
         call append(line(".")+1, "%   authors      : Ban Zhihua" . l:years) 
-        call append(line(".")+2, "%   contact      : sawpara@126.com ") 
+        call append(line(".")+2, "%   contact      : sawpara@126.com") 
         call append(line(".")+3, "%   created time : ".strftime("%c", localtime())) 
         call append(line(".")+4, repeat("%", 79)) 
         call append(line(".")+5, "")
@@ -169,7 +169,7 @@ func SetTitle()
         call setline(1,          "/******************************************************************************") 
         call append(line("."),   "  > file name    : ".expand("%")) 
         call append(line(".")+1, "  > authors      : Ban Zhihua" . l:years) 
-        call append(line(".")+2, "  > contact      : sawpara@126.com ") 
+        call append(line(".")+2, "  > contact      : sawpara@126.com") 
         call append(line(".")+3, "  > created time : ".strftime("%c", localtime())) 
         call append(line(".")+4, "******************************************************************************/") 
         call append(line(".")+5, "")

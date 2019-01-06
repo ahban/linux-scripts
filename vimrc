@@ -190,20 +190,21 @@ func SetTitle()
         call append(line(".")+8, "")
     endif
     if fileext == 'h' || fileext == 'cuh'
-        let l:macname = toupper(expand("%:r"))
+        "let l:macname = toupper(expand("%:r"))
+        let l:macname = toupper(expand("%"))
         let l:macname = substitute(l:macname, "-", "_", "g")
-        if fileext == 'h'
-            call append(line(".")+6, join(["#ifndef __", l:macname, "_H__"], ""))
-            call append(line(".")+7, join(["#define __", l:macname, "_H__ 1"], ""))
-        else
-            call append(line(".")+6, join(["#ifndef __", l:macname, "_CUH__"], ""))
-            call append(line(".")+7, join(["#define __", l:macname, "_CUH__ 1"], ""))
-        endif
+        let l:macname = substitute(l:macname, "\\.", "_", "g")
+        let l:macname = substitute(l:macname, "/", "_", "g")
+        let l:macname = substitute(l:macname, "^", "__", "g")
+        let l:macname = substitute(l:macname, "$", "__", "g")
+        call append(line(".")+6, join(["#ifndef ", l:macname      ], ""))
+        call append(line(".")+7, join(["#define ", l:macname, " 1"], ""))
         call append(line(".")+8, "")
-        call append(line(".")+9, "#endif")
+        call append(line(".")+9, "#endif // end " . l:macname)
+        call cursor(line(".")+8, 0)
     endif
 endfunc 
-au BufNewFile * normal G
+"au BufNewFile * normal G
 
 nnoremap <C-k><C-i> :call InsertComments()<CR>
 func InsertComments()

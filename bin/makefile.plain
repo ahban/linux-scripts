@@ -68,7 +68,7 @@ all: $(GC_OBJECTS) $(CU_OBJECTS)
 	$(CC) $^ $(LD_CFLAGS) -o $(TARGET)
 
 clean:
-	rm -rf *.o *.exe *.out $(TARGET)
+	rm -rf **/*.o **/*.exe **/*.out *.o *.exe *.out $(TARGET)
 
 %.cpp.o: %.cpp
 	$(CC) $(GC_CFLAGS) $^ -o $@

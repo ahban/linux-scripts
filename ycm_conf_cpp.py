@@ -68,6 +68,7 @@ flags = [
 '-I', os.popen('which nvcc').read().replace('bin/nvcc\n', 'include'),
 '-I', p.expanduser('~')+'/devel/gitlab/rkaldi/src',
 '-I', os.getcwd(),
+'-I', os.getcwd()+'/../',
 ]
 
 # Clang automatically sets the '-std=' flag to 'c++14' for MSVC 2015 or later,

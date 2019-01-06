@@ -62,6 +62,8 @@ flags = [
 '-isystem', get_python_inc(),
 '-I', '/usr/include/c++/4.8.5',
 '-I', '/usr/include',
+'-I', os.getcwd(),
+'-I', os.getcwd()+'/../',
 '-I', os.popen('which nvcc').read().replace('bin/nvcc\n', 'include'),
 '--cuda-path=' + os.popen('which nvcc').read().replace('bin/nvcc\n', ''),
 '-nocudalib',

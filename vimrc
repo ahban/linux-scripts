@@ -189,6 +189,7 @@ func SetTitle()
         call append(line(".")+7, "#include <cstdlib>")
         call append(line(".")+8, "")
     endif
+    call cursor(line("$"), 0)
     if fileext == 'h' || fileext == 'cuh'
         "let l:macname = toupper(expand("%:r"))
         let l:macname = toupper(expand("%"))

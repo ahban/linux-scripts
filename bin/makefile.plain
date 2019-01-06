@@ -44,11 +44,11 @@ NV = nvcc -std=c++11
 TARGET=TARGET_PLACE_HOLDER.exe
 
 # cpp source and objects
-GC_SOURCES = $(wildcard *.cpp)
+GC_SOURCES = $(wildcard *.cpp) $(wildcard **/*.cpp)
 GC_OBJECTS = $(GC_SOURCES:.cpp=.cpp.o)
 
 # cuda source and objects
-CU_SOURCES = $(wildcard *.cu)
+CU_SOURCES = $(wildcard *.cu) $(wildcard **/*.cu)
 CU_OBJECTS = $(CU_SOURCES:.cu=.cu.o)
 
 

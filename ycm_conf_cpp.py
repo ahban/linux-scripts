@@ -63,6 +63,7 @@ flags = [
 '-isystem', get_python_inc(),
 '-I', '/usr/include/c++/4.8.5',
 '-I', '/usr/include',
+'-I', '/usr/lib/gcc/x86_64-linux-gnu/4.8/include',
 '-I', '/usr/lib/gcc/x86_64-redhat-linux/4.8.2/include',
 '-I', os.popen('which nvcc').read().replace('bin/nvcc\n', 'include'),
 '-I', p.expanduser('~')+'/devel/gitlab/rkaldi/src',

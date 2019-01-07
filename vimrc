@@ -34,6 +34,8 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 " autocmd BufNewFile,BufRead *.cu set filetype=cpp 
+" It seems that clang only support cuda c syntax, in order to use c++ syntac, I
+" have to set cu and cuh file to c++ filetype
 au BufNewFile,BufRead *.cu  set ft=cpp
 au BufNewFile,BufRead *.cuh set ft=cpp
 let g:ycm_max_diagnostics_to_display = 40

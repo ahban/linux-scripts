@@ -67,6 +67,7 @@ flags = [
 '-I', os.popen('which nvcc').read().replace('bin/nvcc\n', 'include'),
 '--cuda-path=' + os.popen('which nvcc').read().replace('bin/nvcc\n', ''),
 '-nocudalib',
+'-std=c++11',
 ]
 
 # Clang automatically sets the '-std=' flag to 'c++14' for MSVC 2015 or later,

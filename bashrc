@@ -55,6 +55,9 @@ PATHS=(\
 
     # tmux
     "${HOME}/soft/tmux-2.8/bin"
+
+    # htop
+    "${HOME}/soft/htop-2.2.0/bin"
 )
 
 for (( i = 0; i < ${#PATHS[@]}; i++ )); do
@@ -120,6 +123,7 @@ MANS=(\
     "${HOME}/soft/share/man"
     "${HOME}/soft/texlive/2017/texmf-dist/doc/man"
     "${HOME}/soft/tmux-2.8/share/man"
+    "${HOME}/soft/htop-2.2.0/share/man"
 )
 
 for (( i = 0; i < ${#MANS[@]}; i++ )); do

@@ -36,6 +36,14 @@ ln -s ${PWD}/tmux.conf ${HOME}/.tmux.conf
 ln -s ${PWD}/gitconfig ${HOME}/.gitconfig
 
 
+echo "Install vim plugins"
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+vim +PluginInstall +qall
+
+echo "Install you complete me"
+cd ~/.vim/bundle/YouCompleteMe/
+./install.py --clang-completer
+
 # https://www.math.ias.edu/computing/faq/local-latex-style-files
 echo "Installing latex stuff"
 if [[ ! -d ${HOME}/texmf/tex/latex ]]; then

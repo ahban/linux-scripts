@@ -67,6 +67,7 @@ flags = [
 '-I', '/usr/lib/gcc/x86_64-redhat-linux/4.8.2/include',
 '-I', os.popen('which nvcc').read().replace('bin/nvcc\n', 'include'),
 '-I', p.expanduser('~')+'/devel/gitlab/rkaldi/src',
+'-I', p.expanduser('~')+'/devel/kaldi/src',
 '-I', os.getcwd(),
 '-I', os.getcwd()+'/../',
 ]

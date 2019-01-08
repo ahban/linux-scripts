@@ -72,7 +72,7 @@ nnoremap <F12> :YcmCompleter GoTo<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " miscellaneous settings 
-
+set encoding=utf-8
 language en_US.utf8
 set nocompatible
 set mouse=a

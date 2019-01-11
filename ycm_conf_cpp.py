@@ -68,6 +68,7 @@ flags = [
 '-I', os.popen('which nvcc').read().replace('bin/nvcc\n', 'include'),
 '-I', p.expanduser('~')+'/devel/gitlab/rkaldi/src',
 '-I', p.expanduser('~')+'/devel/kaldi/src',
+'-I', p.expanduser('~')+'/devel/casr-tests/src/casr',
 '-I', os.getcwd(),
 '-I', os.getcwd()+'/../',
 ]

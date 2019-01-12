@@ -45,6 +45,7 @@ au filetype cpp,python,c  let g:ycm_global_ycm_extra_conf="${HOME}/.scripts/ycm_
 
 let g:ycm_always_populate_location_list = 1
 
+au filetype text setlocal nowrap
 " NERDTREE
 Bundle 'scrooloose/nerdtree'
 " TAGBAR

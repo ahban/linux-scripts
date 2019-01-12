@@ -17,7 +17,7 @@ call vundle#begin()
     Plugin 'Valloric/YouCompleteMe'
     Plugin 'morhetz/gruvbox'
     Plugin 'maciakl/vim-neatstatus'
-    
+    Plugin 'lervag/vimtex'
     " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required

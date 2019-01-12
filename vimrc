@@ -99,6 +99,8 @@ set number
 " indent with 4 spaces 
 set shiftwidth=4 tabstop=4 expandtab
 au filetype make setlocal tabstop=4 shiftwidth=4
+" help cinoptions-values
+au filetype cpp,cuda,c setlocal cino=>s,e0,n0,f0,{0,}0,^0,L-1,:2,=s,l0,b0,g0.5s,hs,N-s,E-s,ps,t0,i0,+s,c3,C0,/0,(2s,us,U0,w0,W0,k0,m0,j0,J0,)20,*70,#0
 
 " mark the colmn width 
 au filetype markdown,tex,plaintex,cuda,make,cpp,python,c,sh,matlab setlocal colorcolumn=80,120

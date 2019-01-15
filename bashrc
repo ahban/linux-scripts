@@ -88,8 +88,10 @@ LIBS=(\
     #"${HOME}/soft/miniconda3/lib"
     "${HOME}/devel/asgd/readonly/asgd_git/lib"
 
-    "${HOME}/soft/kaldi-copy/lib"
-    "${HOME}/soft/openfst-copy/lib"
+    #"${HOME}/devel/kaldi-no-lda-tests/kaldi-master/tools/openfst/lib"
+    #"${HOME}/devel/kaldi-no-lda-tests/kaldi-master/src/lib"
+    #"${HOME}/soft/kaldi-copy/lib"
+    #"${HOME}/soft/openfst-copy/lib"
 )
 
 for (( i = 0; i < ${#LIBS[@]}; i++ )); do

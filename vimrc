@@ -77,7 +77,7 @@ set encoding=utf-8
 language en_US.utf8
 set nocompatible
 set mouse=a
-set noswapfile
+"set noswapfile
 au filetype tex,plaintex setlocal nowrap
 
 colorscheme gruvbox

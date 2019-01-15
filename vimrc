@@ -9,15 +9,15 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
     " alternatively, pass a path where Vundle should install plugins
     "call vundle#begin('~/some/path/here')
-    
+   
     " let Vundle manage Vundle, required
     Plugin 'VundleVim/Vundle.vim'
 
     " Plugins
     Plugin 'Valloric/YouCompleteMe'
     Plugin 'morhetz/gruvbox'
-    Plugin 'maciakl/vim-neatstatus'
-    
+    "Plugin 'maciakl/vim-neatstatus'
+    "Plugin 'lervag/vimtex'
     " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -33,7 +33,7 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-" autocmd BufNewFile,BufRead *.cu set filetype=cpp 
+" autocmd BufNewFile,BufRead *.cu set filetype=cpp
 " It seems that clang only support cuda c syntax, in order to use c++ syntac, I
 " have to set cu and cuh file to c++ filetype
 au BufNewFile,BufRead *.cu  set ft=cpp
@@ -72,7 +72,7 @@ nnoremap <F12> :YcmCompleter GoTo<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" miscellaneous settings 
+" miscellaneous settings
 set encoding=utf-8
 language en_US.utf8
 set nocompatible
@@ -80,7 +80,7 @@ set mouse=a
 set noswapfile
 au filetype tex,plaintex setlocal nowrap
 
-colorscheme gruvbox 
+colorscheme gruvbox
 
 " split windows
 set splitbelow
@@ -92,17 +92,17 @@ nnoremap <C-h> <C-w><C-h>
 nnoremap <C-k> <C-w><C-k>
 
 " set viminfo
-set viminfo='10000,<10000,s10000,h 
+set viminfo='10000,<10000,s10000,h
 
 set number
 
-" indent with 4 spaces 
+" indent with 4 spaces
 set shiftwidth=4 tabstop=4 expandtab
 au filetype make setlocal tabstop=4 shiftwidth=4
 " help cinoptions-values
 au filetype cpp,cuda,c setlocal cino=>s,e0,n0,f0,{0,}0,^0,L-1,:2,=s,l0,b0,g0.5s,hs,N-s,E-s,ps,t0,i0,+s,c3,C0,/0,(2s,us,U0,w0,W0,k0,m0,j0,J0,)20,*70,#0
 
-" mark the colmn width 
+" mark the colmn width
 au filetype markdown,tex,plaintex,cuda,make,cpp,python,c,sh,matlab setlocal colorcolumn=80,120
 set textwidth=79
 
@@ -137,47 +137,66 @@ if v:version >= 800
     set backspace=indent,eol,start
 endif
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" tex auto insert
+
+au filetype tex,plaintex exec ":call TexAutoComplete()"
+func TexAutoComplete()
+   nnoremap <C-t><C-e> :call InsertEquationBlock()<CR>
+   nnoremap <C-t><c-i> :call InsertIEEEeqnarray()<CR>
+endfunc
+
+func InsertEquationBlock()
+    call append(line('.')+0, "\\begin{equation}")
+    call append(line('.')+1, "\\end{equation}")
+    call cursor(line(".")+1, 1)
+endfunc
+func InsertIEEEeqnarray()
+    call append(line('.')+0, "\\begin{IEEEeqnarray}{rCl}")
+    call append(line('.')+1, "\\end{IEEEeqnarray}")
+    call cursor(line(".")+1, 1)
+endfunc
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " auto insert code
-au BufNewFile *.tex,*.cpp,*.py,*.cc,*.c,*.h,*.hpp,*.cu,*.cuh,*.sh,*.java exec ":call SetTitle()" 
-func SetTitle() 
+au BufNewFile *.tex,*.cpp,*.py,*.cc,*.c,*.h,*.hpp,*.cu,*.cuh,*.sh,*.java exec ":call SetTitle()"
+func SetTitle()
     let fileext = expand("%:e")
     let l:years = '(2018)'
     if strftime('%Y') != '2018'
         let l:years = "(2018-" . strftime("%Y") . ")"
     endif
-    if (&filetype=='sh' || &filetype=='python') 
+    if (&filetype=='sh' || &filetype=='python')
         if &filetype == 'sh'
-            call setline(1, "\#!/bin/bash") 
+            call setline(1, "\#!/bin/bash")
         else
-            call setline(1, "\#!python") 
+            call setline(1, "\#!python")
         endif
-        call append(line(".")+0, "\###############################################################################") 
-        call append(line(".")+1, "\# file name    : ".expand("%")) 
-        call append(line(".")+2, "\# authors      : Ban Zhihua" . l:years) 
-        call append(line(".")+3, "\# contact      : sawpara@126.com") 
-        call append(line(".")+4, "\# created time : ".strftime("%c", localtime())) 
-        call append(line(".")+5, "\###############################################################################") 
-        call append(line(".")+6, "") 
+        call append(line(".")+0, "\###############################################################################")
+        call append(line(".")+1, "\# file name    : ".expand("%"))
+        call append(line(".")+2, "\# authors      : Ban Zhihua" . l:years)
+        call append(line(".")+3, "\# contact      : sawpara@126.com")
+        call append(line(".")+4, "\# created time : ".strftime("%c", localtime()))
+        call append(line(".")+5, "\###############################################################################")
+        call append(line(".")+6, "")
     elseif 'tex' == &filetype || 'plaintex' == &filetype
         call setline(1,          repeat("%", 79))
-        call append(line("."),   "%   file name    : ".expand("%")) 
-        call append(line(".")+1, "%   authors      : Ban Zhihua" . l:years) 
-        call append(line(".")+2, "%   contact      : sawpara@126.com") 
-        call append(line(".")+3, "%   created time : ".strftime("%c", localtime())) 
-        call append(line(".")+4, repeat("%", 79)) 
+        call append(line("."),   "%   file name    : ".expand("%"))
+        call append(line(".")+1, "%   authors      : Ban Zhihua" . l:years)
+        call append(line(".")+2, "%   contact      : sawpara@126.com")
+        call append(line(".")+3, "%   created time : ".strftime("%c", localtime()))
+        call append(line(".")+4, repeat("%", 79))
         call append(line(".")+5, "")
         call append(line(".")+6, "\\documentclass{ctexart}")
         call append(line(".")+7, "\\begin{document}")
         call append(line(".")+8, "\\end{document}")
-    else 
-        call setline(1,          "/******************************************************************************") 
-        call append(line("."),   "  > file name    : ".expand("%")) 
-        call append(line(".")+1, "  > authors      : Ban Zhihua" . l:years) 
-        call append(line(".")+2, "  > contact      : sawpara@126.com") 
-        call append(line(".")+3, "  > created time : ".strftime("%c", localtime())) 
-        call append(line(".")+4, "******************************************************************************/") 
+    else
+        call setline(1,          "/******************************************************************************")
+        call append(line("."),   "  > file name    : ".expand("%"))
+        call append(line(".")+1, "  > authors      : Ban Zhihua" . l:years)
+        call append(line(".")+2, "  > contact      : sawpara@126.com")
+        call append(line(".")+3, "  > created time : ".strftime("%c", localtime()))
+        call append(line(".")+4, "******************************************************************************/")
         call append(line(".")+5, "")
     endif
     if &filetype == 'cpp' && fileext != 'h' && fileext != 'cu' && fileext != 'cuh'
@@ -211,7 +230,7 @@ func SetTitle()
         return
     endif
     call cursor(line("$"), 0)
-endfunc 
+endfunc
 "au BufNewFile * normal G
 
 nnoremap <C-k><C-i> :call InsertComments()<CR>
@@ -239,7 +258,7 @@ func InsertComments()
     endif
 endfunc
 
-nnoremap <C-F5> :call CompileMe()<CR>
+nnoremap <F5> :call CompileMe()<CR>
 
 func CompileMe()
     silent write
@@ -283,7 +302,7 @@ endfunc
     "      Language: vim script
     "    Maintainer: Yichao Zhou (broken.zhou AT gmail dot com)
     "       Version: 1.3
-    "   Description: 
+    "   Description:
     "       This is a simple script to autosave cursor position and fold
     "       information using vim's mkview.  Although you can easily do this job by
     "       just add serveral line to {.,_}vimrc, write a script plugin can make it
@@ -295,7 +314,7 @@ endfunc
     " Suggested Setting:
     "       Please put them in you vimrc file.
     "           set viewoptions=cursor,folds,slash,unix
-    "       
+    "      
     "       Set it in a plugin file looks dirty to me.  So you'd better do it your
     "       self.  This only keywords not in viewoptions is "options". I believe it
     "       does not belong to a view.  If you think you need it, feel free to
@@ -307,8 +326,8 @@ endfunc
     "       Most of code is from wiki.
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-set viewoptions=cursor,folds,slash,unix 
-" let g:skipview_files = ['*\.vim'] 
+set viewoptions=cursor,folds,slash,unix
+" let g:skipview_files = ['*\.vim']
 
 if exists("g:loaded_restore_view")
     finish
@@ -381,37 +400,37 @@ augroup END
     "  -dnd               +mouse             +startuptime       -xsmp
     "  -ebcdic            -mouseshape        +statusline        -xterm_clipboard
     "  +emacs_tags        +mouse_dec         -sun_workshop      -xterm_save
-    "  +eval              +mouse_gpm         +syntax            
-    "  +ex_extra          -mouse_jsbterm     +tag_binary        
-    "  +extra_search      +mouse_netterm     +tag_old_static    
+    "  +eval              +mouse_gpm         +syntax           
+    "  +ex_extra          -mouse_jsbterm     +tag_binary       
+    "  +extra_search      +mouse_netterm     +tag_old_static   
     "     system vimrc file: "$VIM/vimrc"
     "       user vimrc file: "$HOME/.vimrc"
     "   2nd user vimrc file: "~/.vim/vimrc"
     "        user exrc file: "$HOME/.exrc"
     "         defaults file: "$VIMRUNTIME/defaults.vim"
     "    fall-back for $VIM: "/usr/share/vim"
-    "  Compilation: gcc -c -I. -Iproto -DHAVE_CONFIG_H   -Wdate-time  -g -O2 -fdebug-prefix-map=/build/vim-NQEcoP/vim-8.0.1453=. -fstack-protector-strong -Wformat -Werror=format-security -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1       
-    "  Linking: gcc   -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now -Wl,--as-needed -o vim        -lm -ltinfo -lnsl  -lselinux  -lacl -lattr -lgpm -ldl     -L/usr/lib/python3.6/config-3.6m-x86_64-linux-gnu -lpython3.6m -lpthread -ldl -lutil -lm      
+    "  Compilation: gcc -c -I. -Iproto -DHAVE_CONFIG_H   -Wdate-time  -g -O2 -fdebug-prefix-map=/build/vim-NQEcoP/vim-8.0.1453=. -fstack-protector-strong -Wformat -Werror=format-security -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1      
+    "  Linking: gcc   -Wl,-Bsymbolic-functions -Wl,-z,relro -Wl,-z,now -Wl,--as-needed -o vim        -lm -ltinfo -lnsl  -lselinux  -lacl -lattr -lgpm -ldl     -L/usr/lib/python3.6/config-3.6m-x86_64-linux-gnu -lpython3.6m -lpthread -ldl -lutil -lm     
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " Install Vim 8.1 on 3.10.0-514.26.2.el7.x86_64
-    " 1. Download vim-8.1.tar.bz2 from https://ftp.nluug.nl/pub/vim/unix/ 
-    " 2. extract vim81 
+    " 1. Download vim-8.1.tar.bz2 from https://ftp.nluug.nl/pub/vim/unix/
+    " 2. extract vim81
     " 3. Download ncurses from https://ftp.gnu.org/gnu/ncurses/
-    " 4. Install ncurses into home path 
+    " 4. Install ncurses into home path
     "   ./configure --prefix=${HOME}/soft/ncurses; make -j 5 ; make install
     "
-    " 5. Download Python3 from 
+    " 5. Download Python3 from
     "   https://www.python.org/ftp/python/3.6.7/Python-3.6.7.tar.xz
     "   TODO try miniconda3 instead of python3 or anaconda3 and goto step 9
     " 6. Install Python3 into home path
-    "   ./configure --prefix=${HOME}/soft/python3 
+    "   ./configure --prefix=${HOME}/soft/python3
     "   --enable-optimizations --enable-shared
-    "   make -j 5; make install 
-    " 7. [important] change directory into 
+    "   make -j 5; make install
+    " 7. [important] change directory into
     "   ${HOME}/soft/python3/lib/python3.6/config-3.6m-x86_64-linux-gnu
-    "   ln -s ../../libpython3.6m.so libpython3.6m.so 
+    "   ln -s ../../libpython3.6m.so libpython3.6m.so
     " 8. add relative paths into bashrc
     "   export PATH=${HOME}/soft/python3/bin:${PATH}
     "   export LD_LIBRARY_PATH=${HOME}/soft/python3/lib:${LD_LIBRARY_PATH}
@@ -422,6 +441,6 @@ augroup END
     "     --enable-gui=no --disable-nls \
     "     --with-features=huge --enable-cscope --enable-multibyte --with-tlib=ncurses \
     "     --enable-python3interp=yes \
-    "     --with-python3-command=python3 \ 
+    "     --with-python3-command=python3 \
     "     --with-python3-config-dir=${HOME}/soft/python3/lib/python3.6/config-3.6m-x86_64-linux-gnu \
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

@@ -48,7 +48,7 @@ PATHS=(\
     "${HOME}/soft/cuda-8.0/bin"
 
     # git 
-    "${HOME}/soft/git-2.18.1/bin"
+    #"${HOME}/soft/git-2.18.1/bin"
 
     # texlive 
     "${HOME}/soft/texlive/2017/bin/x86_64-linux"
@@ -86,6 +86,10 @@ LIBS=(\
     "${HOME}/soft/python3/lib"
     "${HOME}/soft/anaconda3/lib"
     #"${HOME}/soft/miniconda3/lib"
+    "${HOME}/devel/asgd/readonly/asgd_git/lib"
+
+    "${HOME}/soft/kaldi-copy/lib"
+    "${HOME}/soft/openfst-copy/lib"
 )
 
 for (( i = 0; i < ${#LIBS[@]}; i++ )); do

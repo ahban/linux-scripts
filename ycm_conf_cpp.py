@@ -66,9 +66,8 @@ flags = [
 '-I', '/usr/lib/gcc/x86_64-linux-gnu/4.8/include',
 '-I', '/usr/lib/gcc/x86_64-redhat-linux/4.8.2/include',
 '-I', os.popen('which nvcc').read().replace('bin/nvcc\n', 'include'),
-'-I', p.expanduser('~')+'/devel/gitlab/rkaldi/src',
-'-I', p.expanduser('~')+'/devel/kaldi/src',
-'-I', p.expanduser('~')+'/devel/casr-tests/src/casr',
+'-I', p.expanduser('~')+'/soft/kaldi-copy/include',
+'-I', p.expanduser('~')+'/soft/openfst-copy/include',
 '-I', os.getcwd(),
 '-I', os.getcwd()+'/../',
 ]

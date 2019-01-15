@@ -77,7 +77,7 @@ set encoding=utf-8
 language en_US.utf8
 set nocompatible
 set mouse=a
-set noswapfile
+"set noswapfile
 au filetype tex,plaintex setlocal nowrap
 
 colorscheme gruvbox
@@ -290,7 +290,7 @@ func CompileMe()
     endif
     " python
     if &filetype == 'python'
-        echo system('python '.expand("%:p"))
+        echo system('python3 '.expand("%:p"))
     endif
     " c++ / cuda / c
     if &filetype == 'cpp' || &filetype == 'cuda' || &filetype == 'c'

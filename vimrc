@@ -290,7 +290,7 @@ func CompileMe()
     endif
     " python
     if &filetype == 'python'
-        echo system('python '.expand("%:p"))
+        echo system('python3 '.expand("%:p"))
     endif
     " c++ / cuda / c
     if &filetype == 'cpp' || &filetype == 'cuda' || &filetype == 'c'

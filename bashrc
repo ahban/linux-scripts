@@ -49,7 +49,7 @@ PATHS=(\
     "${HOME}/soft/cuda-8.0/bin"
 
     # git 
-    #"${HOME}/soft/git-2.18.1/bin"
+    "${HOME}/soft/git-2.18.1/bin"
 
     # texlive 
     "${HOME}/soft/texlive/2017/bin/x86_64-linux"

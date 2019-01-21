@@ -298,7 +298,7 @@ func CompileMe()
         echo system('python3 '.expand("%:p"))
     endif
     " bash
-    if &filetype == "bash"
+    if &filetype == "sh"
         echo system('/bin/bash '.expand("%:p"))
     endif
     " c++ / cuda / c

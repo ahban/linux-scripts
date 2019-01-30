@@ -104,7 +104,7 @@ au filetype cpp,cuda,c setlocal cino=>s,e0,n0,f0,{0,}0,^0,L-1,:2,=s,l0,b0,g0.5s,
 
 " mark the colmn width
 au filetype markdown,tex,plaintex,cuda,make,cpp,python,c,sh,matlab setlocal colorcolumn=80,120
-set textwidth=79
+au filetype markdown,tex,plaintex,cuda,make,cpp,python,c,matlab setlocal textwidth=80
 
 " fold stuff
 au filetype vim,cuda,cpp,c,tex,plaintex,sh,python,make,matlab setlocal foldmethod=indent

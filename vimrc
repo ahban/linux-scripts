@@ -269,8 +269,8 @@ func CompileMe()
     silent write
     " latex compile
     if &filetype == 'tex' || &filetype == 'plaintex'
-        silent let log = system('rm -rf '.expand("%:p:r").'.aux')
-        silent let log = system('rm -rf '.expand("%:p:r").'.log')
+        "silent let log = system('rm -rf '.expand("%:p:r").'.aux')
+        "silent let log = system('rm -rf '.expand("%:p:r").'.log')
         for line_number in range(1, line('$'))
             let     line_str = getline(line_number)
             let  matched_str = matchstr(line_str, '^\s*[^%]\s*documentclass\s*\(\[.*\]\)\?\s*\({.*}\)')
@@ -280,7 +280,7 @@ func CompileMe()
                 if 'ctexart' == matched_str || 'ctexrep' == matched_str || 'ctexbook' == matched_str || 'ctexbeamer' == matched_str
                     silent let log = system('xelatex -shell-escape ' . expand('%'))
                 else
-                    silent let log = system('pdflatex '.expand('%'))
+                    silent let log = system('pdflatex -shell-escape '.expand('%'))
                 endif
                 if v:shell_error == 0
                     silent let l = system('evince '.expand("%:p:r").".pdf &")
